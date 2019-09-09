@@ -29,11 +29,14 @@ public class UserController {
         return userService.signUp(signUpInfo);
     }
 
+    @GetMapping()
     public Session login(LoginInfo loginInfo) throws ServiceException {
         return userService.login(loginInfo);
 
 
     }
+
+
 
 
 

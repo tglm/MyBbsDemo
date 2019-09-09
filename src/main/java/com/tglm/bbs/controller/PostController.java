@@ -23,20 +23,16 @@ public class PostController {
 
 
     @GetMapping("/list")
-    public Page<Post> list(){
+    public Page<Post> list() {
         return postService.listAll();
 
     }
 
 
-
     @GetMapping("/post")
-    public void post(Post post){
+    public void post(Post post) {
         postService.post(post);
     }
-
-
-
 
 
 }

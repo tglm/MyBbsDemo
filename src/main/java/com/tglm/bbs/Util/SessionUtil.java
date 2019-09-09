@@ -56,8 +56,8 @@ public class SessionUtil {
         Session session = new Session(
                 temporaryId.toString(),
                 date,
-                user.getUsername(),
-                user.getRole());
+                user.getUsername()
+        );
 
         redisUtil.save(session);
         return session;
