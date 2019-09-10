@@ -5,12 +5,15 @@ import com.tglm.bbs.entities.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author mlgt
  * @date 2019/9/8
  */
 @Service
 public class CommentService {
+
 
     private final CommentMapper commentMapper;
 
@@ -20,9 +23,16 @@ public class CommentService {
     }
 
     public void saveComment(Comment comment){
-        commentMapper.SaveComment(comment);
+        commentMapper.saveComment(comment);
 
     }
 
 
+    public List<Comment> getComment(Long postId){
+        return commentMapper.getComment(postId);
+    }
+
+
 }
+
+

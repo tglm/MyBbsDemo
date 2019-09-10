@@ -1,5 +1,6 @@
 package com.tglm.bbs.controller;
 
+import com.tglm.bbs.aop.Permit;
 import com.tglm.bbs.entities.Post;
 import com.tglm.bbs.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,16 +24,18 @@ public class PostController {
 
 
     @GetMapping("/list")
-    public Page<Post> list() {
+    public Page<Post> listAll() {
         return postService.listAll();
 
     }
 
-
+    @Permit("user")
     @GetMapping("/post")
     public void post(Post post) {
         postService.post(post);
     }
+
+
 
 
 }

@@ -4,6 +4,8 @@ import com.tglm.bbs.entities.Comment;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @author mlgt
  * @date 2019/9/9
@@ -14,14 +16,14 @@ public interface CommentMapper {
     /**
      * @param comment
      */
-    void SaveComment(@Param("comment") Comment comment);
+    void saveComment(@Param("comment") Comment comment);
 
     /**
      * 拿到Comment
-     * @param commentid long
+     * @param postId long
      * @return 
      */
-    Comment getComment(@Param("comment_id") long commentId);
+    List<Comment> getComment(@Param("postId") Long postId);
 
 
 }

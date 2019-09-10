@@ -20,5 +20,5 @@ public class Session implements Serializable {
     private String sessionId;
     private Date lastAccessTime;
     private String username;
-
+    private String role;
 }

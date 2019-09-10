@@ -1,8 +1,12 @@
 package com.tglm.bbs.controller;
 
+import com.tglm.bbs.entities.Comment;
 import com.tglm.bbs.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @author mlgt
@@ -19,9 +23,14 @@ public class CommentController {
         this.commentService = commentService;
     }
 
+    @GetMapping("/saveComment")
     public void saveComment(Comment comment){
         commentService.saveComment(comment);
     }
 
+    @GetMapping("/getComment")
+    public List<Comment> getComment(Long postId){
+        return commentService.getComment(postId);
 
+    }
 }

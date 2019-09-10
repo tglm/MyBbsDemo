@@ -29,9 +29,16 @@ public class UserController {
         return userService.signUp(signUpInfo);
     }
 
-    @GetMapping()
+    @GetMapping("/login")
     public Session login(LoginInfo loginInfo) throws ServiceException {
         return userService.login(loginInfo);
+
+
+    }
+
+    @PostMapping("uploadAvatar")
+    public void uploadAvatar (){
+
 
 
     }
