@@ -1,7 +1,10 @@
-package com.tglm.bbs.aop;
+package com.tglm.bbs.permission;
 
 import com.tglm.bbs.Util.RedisUtil;
+import com.tglm.bbs.Util.RequestUtil;
+import com.tglm.bbs.Util.SessionUtil;
 import com.tglm.bbs.entities.Session;
+import com.tglm.bbs.exception.ServiceException;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,20 +16,18 @@ import org.springframework.stereotype.Component;
  */
 @Aspect
 @Component
-public class PermitAspect {
+public class PermissionAspect {
     private final RedisUtil redisUtil;
-    private final RequestUtil requestUtil;
 
     @Autowired
-    public PermitAspect(RedisUtil redisUtil, RequestUtil requestUtil) {
+    public PermissionAspect(RedisUtil redisUtil) {
         this.redisUtil = redisUtil;
-        this.requestUtil = requestUtil;
     }
 
     @Before("@annotation(permit)")
     public void permissionCheck(Permit permit) throws ServiceException {
 
-        Session session = redisUtil.getSession(requestUtil.getHeaderInfo().getSessionId());
+        Session session = redisUtil.getSession(RequestUtil.getHeaderInfo().getSessionId());
 
         if(!SessionUtil.valid(session)){throw ServiceException.forCode(ServiceException.SESSION_EXPIRED);}
         if( !permit.role().equals(session.getRole()) ){

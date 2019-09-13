@@ -1,4 +1,4 @@
-package com.tglm.bbs.dto;
+package com.tglm.bbs.Util;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -6,12 +6,13 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author mlgt
- * @date 2019/8/30
+ * @date 2019/9/13
  */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class HeaderInfo {
-    String ip;
-    String sessionId;
+public class PageArgs {
+    private Integer pageNum;
+    private Integer pageSize;
 }

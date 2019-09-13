@@ -1,6 +1,7 @@
 package com.tglm.bbs.controller;
 
 import com.tglm.bbs.entities.Comment;
+import com.tglm.bbs.exception.ServiceException;
 import com.tglm.bbs.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +15,6 @@ import java.util.List;
  */
 @RestController("/comment")
 public class CommentController {
-
 
     private final CommentService commentService;
 
@@ -32,5 +32,10 @@ public class CommentController {
     public List<Comment> getComment(Long postId){
         return commentService.getComment(postId);
 
+    }
+
+    @GetMapping("/deletePost")
+    public String deleteComment(Long postId) throws ServiceException {
+        return commentService.deleteCommentByPostId(postId);
     }
 }

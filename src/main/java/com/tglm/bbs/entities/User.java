@@ -64,10 +64,14 @@ public class User {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         User user = (User) o;
-        return userId == user.userId &&
+        return userId.equals(user.userId) &&
                 Objects.equals(password, user.password) &&
                 Objects.equals(username, user.username) &&
                 Objects.equals(avatar, user.avatar);

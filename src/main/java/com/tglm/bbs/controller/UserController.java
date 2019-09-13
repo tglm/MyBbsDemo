@@ -7,6 +7,7 @@ import com.tglm.bbs.exception.ServiceException;
 import com.tglm.bbs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author mlgt
@@ -37,9 +38,9 @@ public class UserController {
     }
 
     @PostMapping("uploadAvatar")
-    public void uploadAvatar (){
+    public void uploadAvatar (@RequestBody MultipartFile file){
 
-
+        userService.uploadAvatar(file);
 
     }
 

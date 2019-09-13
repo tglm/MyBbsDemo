@@ -10,9 +10,9 @@ import java.util.Objects;
  */
 @Entity
 public class Post {
-    private long postId;
+    private Long postId;
     private String content;
-    private long creatorId;
+    private Long creatorId;
     private boolean topic;
     private Long formerPostId;
     private Timestamp dateCreate;
@@ -20,11 +20,11 @@ public class Post {
 
     @Id
     @Column(name = "post_id", nullable = false)
-    public long getPostId() {
+    public Long getPostId() {
         return postId;
     }
 
-    public void setPostId(long postId) {
+    public void setPostId(Long postId) {
         this.postId = postId;
     }
 
@@ -40,11 +40,11 @@ public class Post {
 
     @Basic
     @Column(name = "creator_id", nullable = false)
-    public long getCreatorId() {
+    public Long getCreatorId() {
         return creatorId;
     }
 
-    public void setCreatorId(long creatorId) {
+    public void setCreatorId(Long creatorId) {
         this.creatorId = creatorId;
     }
 

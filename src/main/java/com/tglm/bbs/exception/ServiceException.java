@@ -6,7 +6,7 @@ import lombok.Getter;
  * @author mlgt
  * @date 2019/9/2
  */
-
+@Getter
 public class ServiceException extends Exception {
 
     public static final int EXCEED_AUTHORITY = 1001;
@@ -17,12 +17,13 @@ public class ServiceException extends Exception {
     public static final int NO_SUCH_USERNAME = 1006;
     public static final int WRONG_PASSWORD = 1007;
     public static final int PASSWORD_REPEATED = 1008;
+    public static final int TOO_MANY_FILES = 1009;
+    public static final int NULL_PARAMETER_ERROR = 1010;
 
 
 
-    @Getter
+
     private int code;
-    @Getter
     private String message;
 
 

@@ -1,9 +1,9 @@
 package com.tglm.bbs.Util;
 
-import com.example.qaq.po.Header;
-import org.springframework.stereotype.Component;
+import com.tglm.bbs.dto.HeaderInfo;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.servlet.support.RequestContext;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
@@ -12,10 +12,9 @@ import java.util.Objects;
  * @author mlgt
  * @date 2019/8/30
  */
-@Component
 public class RequestUtil {
 
-    public Header getHeaderInfo() {
+    public static HeaderInfo getHeaderInfo() {
         HttpServletRequest request = (
                 (ServletRequestAttributes)
                         Objects.requireNonNull(
@@ -29,7 +28,20 @@ public class RequestUtil {
         if (sessionId == null || "unknown".equals(sessionId)) {
             sessionId = "";
         }
-        return new Header(ip, sessionId);
+        return new HeaderInfo(ip, sessionId);
     }
+
+
+    public static RequestContext getRequestContext(){
+
+        HttpServletRequest request = (
+                (ServletRequestAttributes)
+                        Objects.requireNonNull(
+                                RequestContextHolder.getRequestAttributes())
+        ).getRequest();
+
+        return new RequestContext(request);
+    }
+
 
 }

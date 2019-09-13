@@ -1,6 +1,7 @@
 package com.tglm.bbs.Util;
 
 
+import com.tglm.bbs.entities.Admin;
 import com.tglm.bbs.entities.Session;
 import com.tglm.bbs.entities.User;
 import lombok.Getter;
@@ -36,9 +37,9 @@ public class SessionUtil {
     /**
      * 自动存储session到redis
      *
-     * @param user User
+     * @param visitor User
      */
-    public Session init(User user) {
+    public Session init(Object visitor) {
         StringBuilder temporaryId = new StringBuilder();
         Random r = new Random();
         int length = 20;
@@ -53,11 +54,27 @@ public class SessionUtil {
 
         Date date = new Date();
         date.setTime(System.currentTimeMillis());
-        Session session = new Session(
-                temporaryId.toString(),
-                date,
-                user.getUsername()
-        );
+        Session session;
+        String role;
+        if(visitor.getClass().equals(User.class)){
+            role = "user";
+            session = new Session(
+                    temporaryId.toString(),
+                    date,
+                    ((User) visitor).getUsername(),
+                    role
+            );
+
+        }else{
+            role = "admin";
+            session = new Session(
+                    temporaryId.toString(),
+                    date,
+                    ((Admin)visitor).getAccount(),
+                    role
+            );
+
+        }
 
         redisUtil.save(session);
         return session;

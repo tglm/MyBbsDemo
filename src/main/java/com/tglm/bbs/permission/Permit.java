@@ -1,4 +1,4 @@
-package com.tglm.bbs.aop;
+package com.tglm.bbs.permission;
 
 /**
  * @author mlgt

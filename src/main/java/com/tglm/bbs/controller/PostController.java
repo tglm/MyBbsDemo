@@ -1,6 +1,7 @@
 package com.tglm.bbs.controller;
 
-import com.tglm.bbs.aop.Permit;
+import com.tglm.bbs.exception.ServiceException;
+import com.tglm.bbs.permission.Permit;
 import com.tglm.bbs.entities.Post;
 import com.tglm.bbs.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,18 +25,28 @@ public class PostController {
 
 
     @GetMapping("/list")
-    public Page<Post> listAll() {
+    public Page<Post> listAll() throws ServiceException {
         return postService.listAll();
 
     }
 
     @Permit("user")
     @GetMapping("/post")
-    public void post(Post post) {
-        postService.post(post);
+    public String post(Post post) throws ServiceException {
+        return postService.post(post);
     }
 
 
+    @Permit("user")
+    @GetMapping("/updatePost")
+    public String updatePost(Post post) throws ServiceException {
+        return postService.updatePost(post);
 
+    }
+
+    @GetMapping("/deletPost")
+    public String deletePost(Post post) throws ServiceException {
+        return postService.deletePost(post);
+    }
 
 }

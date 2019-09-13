@@ -37,8 +37,12 @@ public class Admin {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Admin admin = (Admin) o;
         return Objects.equals(account, admin.account) &&
                 Objects.equals(password, admin.password);

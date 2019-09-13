@@ -7,8 +7,10 @@ import com.tglm.bbs.dto.SignUpInfo;
 import com.tglm.bbs.entities.Session;
 import com.tglm.bbs.entities.User;
 import com.tglm.bbs.exception.ServiceException;
+import com.tglm.bbs.upload.Upload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author mlgt
@@ -70,6 +72,11 @@ public class UserService {
     }
 
 
+    @Upload(file = "avatar",maxfileSize = 1024*1024*5,maxfile = 1)
+    public String uploadAvatar(MultipartFile file){
 
+
+
+    }
 
 }

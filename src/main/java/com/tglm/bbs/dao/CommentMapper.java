@@ -1,7 +1,7 @@
 package com.tglm.bbs.dao;
 
 import com.tglm.bbs.entities.Comment;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,16 +14,28 @@ import java.util.List;
 public interface CommentMapper {
 
     /**
-     * @param comment
+     * 上传评论
+     *
+     * @param comment Comment
      */
-    void saveComment(@Param("comment") Comment comment);
+    @Options(useGeneratedKeys = true, keyColumn = "comment_id", keyProperty = "commentId")
+    @Insert("INSERT bbs.comment(content,date,comment_id,former_comment,post_id) VALUES (#{content},#{date},#{commentId},#{formerComment},#{postId});")
+    void saveComment(Comment comment);
 
     /**
      * 拿到Comment
-     * @param postId long
-     * @return 
+     *
+     * @param postId Long
+     * @return 该帖子下所有评论
      */
+    @Select("SELECT * FROM bbs.comment WHERE post_id = #{postId};")
     List<Comment> getComment(@Param("postId") Long postId);
 
-
+    /**
+     * 删除帖子下的所有评论
+     *
+     * @param postId Long
+     */
+    @Delete("DELETE * FROM bbs.comment WHERE post_id = #{postId};")
+    void deleteCommentByPostId(@Param("postId") Long postId);
 }
