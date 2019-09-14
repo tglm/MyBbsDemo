@@ -38,9 +38,9 @@ public class UserController {
     }
 
     @PostMapping("uploadAvatar")
-    public void uploadAvatar (@RequestBody MultipartFile file){
+    public String uploadAvatar (@RequestBody MultipartFile file){
 
-        userService.uploadAvatar(file);
+        return userService.uploadAvatar(file);
 
     }
 

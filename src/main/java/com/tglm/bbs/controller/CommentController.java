@@ -1,6 +1,6 @@
 package com.tglm.bbs.controller;
 
-import com.tglm.bbs.entities.Comment;
+import com.tglm.bbs.dto.CommentInfo;
 import com.tglm.bbs.exception.ServiceException;
 import com.tglm.bbs.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +24,13 @@ public class CommentController {
     }
 
     @GetMapping("/saveComment")
-    public void saveComment(Comment comment){
-        commentService.saveComment(comment);
+    public void saveComment(CommentInfo commentInfo){
+        commentService.saveComment(commentInfo);
     }
 
     @GetMapping("/getComment")
-    public List<Comment> getComment(Long postId){
-        return commentService.getComment(postId);
+    public List<CommentInfo> getComment(Long postId){
+        return commentService.getCommentInfo(postId);
 
     }
 

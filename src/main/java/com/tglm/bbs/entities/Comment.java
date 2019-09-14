@@ -1,23 +1,40 @@
 package com.tglm.bbs.entities;
 
+import com.tglm.bbs.Util.DateUtil;
+import com.tglm.bbs.dto.CommentInfo;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.ParseException;
 import java.util.Objects;
 
 /**
  * @author mlgt
- * @date 2019/9/9
+ * @date 2019/9/14
  */
 @Entity
+@NoArgsConstructor
 public class Comment {
     private String content;
-    private Date date;
-    private long commentId;
+    private Timestamp date;
+    private Long commentId;
     private Long formerComment;
     private Long postId;
+
+    public Comment(CommentInfo commentInfo) throws ParseException {
+
+        this.content = commentInfo.getContent();
+        this.commentId = commentInfo.getCommentId();
+        this.formerComment = commentInfo.getFormerComment();
+        this.postId = commentInfo.getPostId();
+        this.date = DateUtil.dateToTimestamp(commentInfo.getDate());
+
+
+    }
 
     @Basic
     @Column(name = "content", nullable = false, length = -1)
@@ -31,21 +48,21 @@ public class Comment {
 
     @Basic
     @Column(name = "date", nullable = false)
-    public Date getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Timestamp date) {
         this.date = date;
     }
 
     @Id
     @Column(name = "comment_id", nullable = false)
-    public long getCommentId() {
+    public Long getCommentId() {
         return commentId;
     }
 
-    public void setCommentId(long commentId) {
+    public void setCommentId(Long commentId) {
         this.commentId = commentId;
     }
 
@@ -71,10 +88,14 @@ public class Comment {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Comment comment = (Comment) o;
-        return commentId == comment.commentId &&
+        return commentId.equals(comment.commentId) &&
                 Objects.equals(content, comment.content) &&
                 Objects.equals(date, comment.date) &&
                 Objects.equals(formerComment, comment.formerComment) &&

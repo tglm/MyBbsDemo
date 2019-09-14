@@ -11,7 +11,7 @@ import java.util.Objects;
 
 /**
  * @author mlgt
- * @date 2019/9/9
+ * @date 2019/9/14
  */
 @Entity
 @AllArgsConstructor
@@ -34,11 +34,11 @@ public class User {
 
     @Id
     @Column(name = "user_id", nullable = false)
-    public long getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
@@ -81,4 +81,5 @@ public class User {
     public int hashCode() {
         return Objects.hash(password, userId, username, avatar);
     }
+
 }

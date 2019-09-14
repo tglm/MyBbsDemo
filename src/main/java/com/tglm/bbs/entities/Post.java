@@ -1,14 +1,22 @@
 package com.tglm.bbs.entities;
 
+import com.tglm.bbs.Util.DateUtil;
+import com.tglm.bbs.dto.PostInfo;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.util.Objects;
 
 /**
  * @author mlgt
- * @date 2019/9/9
+ * @date 2019/9/14
  */
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Post {
     private Long postId;
     private String content;
@@ -16,7 +24,16 @@ public class Post {
     private boolean topic;
     private Long formerPostId;
     private Timestamp dateCreate;
-    private User userByCreatorId;
+
+    public Post(PostInfo postInfo) throws ParseException {
+        this.postId = postInfo.getPostId();
+        this.content = postInfo.getContent();
+        this.creatorId = postInfo.getCreatorId();
+        this.topic = postInfo.isTopic();
+        this.dateCreate= DateUtil.dateToTimestamp(postInfo.getDateCreate());
+        this.formerPostId = postInfo.getFormerPostId();
+
+    }
 
     @Id
     @Column(name = "post_id", nullable = false)
@@ -87,8 +104,8 @@ public class Post {
             return false;
         }
         Post post = (Post) o;
-        return postId == post.postId &&
-                creatorId == post.creatorId &&
+        return postId.equals(post.postId) &&
+                creatorId.equals(post.creatorId) &&
                 topic == post.topic &&
                 Objects.equals(content, post.content) &&
                 Objects.equals(formerPostId, post.formerPostId) &&
@@ -100,13 +117,5 @@ public class Post {
         return Objects.hash(postId, content, creatorId, topic, formerPostId, dateCreate);
     }
 
-    @ManyToOne
-    @JoinColumn(name = "creator_id", referencedColumnName = "user_id", nullable = false)
-    public User getUserByCreatorId() {
-        return userByCreatorId;
-    }
 
-    public void setUserByCreatorId(User userByCreatorId) {
-        this.userByCreatorId = userByCreatorId;
-    }
 }

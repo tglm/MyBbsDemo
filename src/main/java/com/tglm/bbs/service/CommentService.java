@@ -1,11 +1,14 @@
 package com.tglm.bbs.service;
 
+import com.tglm.bbs.Util.InfoUtil;
 import com.tglm.bbs.dao.CommentMapper;
+import com.tglm.bbs.dto.CommentInfo;
 import com.tglm.bbs.entities.Comment;
 import com.tglm.bbs.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -23,14 +26,20 @@ public class CommentService {
         this.commentMapper = commentMapper;
     }
 
-    public void saveComment(Comment comment){
+    public void saveComment(CommentInfo commentInfo) throws ParseException {
+        Comment comment = new Comment(commentInfo);
         commentMapper.saveComment(comment);
 
     }
 
 
-    public List<Comment> getComment(Long postId){
-        return commentMapper.getComment(postId);
+    public List<CommentInfo> getCommentInfo(Long postId){
+        List<CommentInfo> commentInfoList = null;
+        List<Comment> comments = commentMapper.getComment(postId);
+        for (Comment comment: comments) {
+            commentInfoList.add(InfoUtil.toCommentInfo(comment));
+        }
+        return commentInfoList;
     }
 
     public String deleteCommentByPostId(Long postId) throws ServiceException {
