@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -24,7 +25,7 @@ public class CommentController {
     }
 
     @GetMapping("/saveComment")
-    public void saveComment(CommentInfo commentInfo){
+    public void saveComment(CommentInfo commentInfo) throws ParseException {
         commentService.saveComment(commentInfo);
     }
 

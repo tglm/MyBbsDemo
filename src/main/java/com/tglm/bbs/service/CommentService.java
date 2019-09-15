@@ -33,9 +33,12 @@ public class CommentService {
     }
 
 
-    public List<CommentInfo> getCommentInfo(Long postId){
+    public List<CommentInfo> getCommentInfo(Long postId) throws ServiceException {
         List<CommentInfo> commentInfoList = null;
         List<Comment> comments = commentMapper.getComment(postId);
+        if (comments==null){
+            throw ServiceException.forCode(ServiceException.NULL_PARAMETER_ERROR);
+        }
         for (Comment comment: comments) {
             commentInfoList.add(InfoUtil.toCommentInfo(comment));
         }

@@ -1,5 +1,6 @@
 package com.tglm.bbs.service;
 
+import com.tglm.bbs.Util.RedisUtil;
 import com.tglm.bbs.Util.RequestUtil;
 import com.tglm.bbs.Util.SessionUtil;
 import com.tglm.bbs.dao.UserMapper;
@@ -14,6 +15,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 /**
  * @author mlgt
  * @date 2019/9/8
@@ -25,14 +30,17 @@ public class UserService {
 
     private SessionUtil sessionUtil;
     private UserMapper userMapper;
-    public UserService(SessionUtil sessionUtil, UserMapper userMapper) {
+    private final RedisUtil redisUtil;
+    public UserService(SessionUtil sessionUtil, UserMapper userMapper, RedisUtil redisUtil) {
         this.sessionUtil = sessionUtil;
         this.userMapper = userMapper;
+        this.redisUtil = redisUtil;
     }
 
     @Autowired
-    public UserService(UserMapper userMapper) {
+    public UserService(UserMapper userMapper, RedisUtil redisUtil) {
         this.userMapper = userMapper;
+        this.redisUtil = redisUtil;
     }
 
     public String signUp(SignUpInfo signUpInfo) throws ServiceException {
@@ -78,11 +86,11 @@ public class UserService {
 
 
     @Upload(file = "avatar",maxfileSize = 1024*1024*5,maxfile = 1)
-    public String uploadAvatar(MultipartFile file){
-        String avatarPath = RequestUtil.
+    public String uploadAvatar(MultipartFile file) throws IOException {
+        Path avatarPath = Paths.get(avatarRootPath + redisUtil.getSession(RequestUtil.getHeaderInfo().getSessionId()).getUsername());
+        file.transferTo(avatarPath);
 
-
-
+        return "上传成功";
     }
 
 }
