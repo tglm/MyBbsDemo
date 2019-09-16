@@ -30,7 +30,7 @@ public class CommentController {
     }
 
     @GetMapping("/getComment")
-    public List<CommentInfo> getComment(Long postId){
+    public List<CommentInfo> getComment(Long postId) throws ServiceException {
         return commentService.getCommentInfo(postId);
 
     }

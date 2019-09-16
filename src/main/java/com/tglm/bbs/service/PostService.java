@@ -10,7 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
-import java.util.function.Function;
 
 /**
  * @author mlgt
@@ -20,6 +19,7 @@ import java.util.function.Function;
 public class PostService {
 
     private final PostMapper postMapper;
+
 
     @Autowired
     public PostService(PostMapper postMapper) {
@@ -44,12 +44,7 @@ public class PostService {
         }
 
         Page<Post> posts = postMapper.listAll();
-        return posts.map(new Function<Post, PostInfo>() {
-            @Override
-            public PostInfo apply(Post post) {
-                return InfoUtil.toPostInfo(post);
-            }
-        });
+        return posts.map(InfoUtil::toPostInfo);
     }
 
     public String updatePost(PostInfo postInfo) throws ServiceException, ParseException {

@@ -18,13 +18,13 @@ import java.util.List;
 @Service
 public class CommentService {
 
-
     private final CommentMapper commentMapper;
 
     @Autowired
     public CommentService(CommentMapper commentMapper) {
         this.commentMapper = commentMapper;
     }
+
 
     public void saveComment(CommentInfo commentInfo) throws ParseException {
         Comment comment = new Comment(commentInfo);
@@ -36,17 +36,18 @@ public class CommentService {
     public List<CommentInfo> getCommentInfo(Long postId) throws ServiceException {
         List<CommentInfo> commentInfoList = null;
         List<Comment> comments = commentMapper.getComment(postId);
-        if (comments==null){
+        if (comments == null) {
             throw ServiceException.forCode(ServiceException.NULL_PARAMETER_ERROR);
         }
-        for (Comment comment: comments) {
+        for (Comment comment : comments) {
             commentInfoList.add(InfoUtil.toCommentInfo(comment));
         }
         return commentInfoList;
     }
 
     public String deleteCommentByPostId(Long postId) throws ServiceException {
-        if(postId==null){throw ServiceException.forCode(ServiceException.NULL_PARAMETER_ERROR);
+        if (postId == null) {
+            throw ServiceException.forCode(ServiceException.NULL_PARAMETER_ERROR);
         }
         commentMapper.deleteCommentByPostId(postId);
         return "删除成功";

@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
 /**
  * @author mlgt
  * @date 2019/9/8
@@ -38,7 +40,7 @@ public class UserController {
     }
 
     @PostMapping("uploadAvatar")
-    public String uploadAvatar (@RequestBody MultipartFile file){
+    public String uploadAvatar (@RequestBody MultipartFile file) throws IOException {
 
         return userService.uploadAvatar(file);
 
