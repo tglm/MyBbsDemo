@@ -20,10 +20,10 @@ public interface UserMapper {
     /**
      * 注册保存User信息
      *
-     * @Param User usr
+     * @Param User user
      */
     @Options(useGeneratedKeys = true, keyProperty = "userId", keyColumn = "user_id")
-    @Insert("INSERT bbs.user(user_id,username,password,avatar) VALUES (#{userId},#{username},#{password},#{avatar});")
+    @Insert("INSERT INTO bbs.user (password,username,avatar) VALUES (#{password},#{username},#{avatar});")
     void saveUser(User user);
 
     /**

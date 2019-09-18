@@ -7,8 +7,8 @@ import lombok.Data;
  * @date 2019/9/8
  */
 @Data
-public class SignUpInfo {
-    String username;
-    String password;
-    String role;
+public class SignInfo {
+    private String username;
+    private String password;
+
 }

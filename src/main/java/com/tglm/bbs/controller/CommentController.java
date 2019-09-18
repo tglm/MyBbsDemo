@@ -1,5 +1,7 @@
 package com.tglm.bbs.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.tglm.bbs.dto.CommentInfo;
 import com.tglm.bbs.exception.ServiceException;
 import com.tglm.bbs.service.CommentService;
@@ -27,7 +29,9 @@ public class CommentController {
     }
 
     @PostMapping("/saveComment")
-    public void saveComment(@RequestBody CommentInfo commentInfo) throws ParseException, ServiceException {
+    public void saveComment(@RequestBody JSONObject commentInfoParam) throws ParseException, ServiceException {
+        JSONObject signInfoJson = commentInfoParam.getJSONObject("commentInfo");
+        CommentInfo commentInfo = JSON.toJavaObject(signInfoJson,CommentInfo.class);
         commentService.saveComment(commentInfo);
     }
 

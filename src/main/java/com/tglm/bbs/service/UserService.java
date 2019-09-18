@@ -4,8 +4,7 @@ import com.tglm.bbs.Util.RedisUtil;
 import com.tglm.bbs.Util.RequestUtil;
 import com.tglm.bbs.Util.SessionUtil;
 import com.tglm.bbs.dao.UserMapper;
-import com.tglm.bbs.dto.LoginInfo;
-import com.tglm.bbs.dto.SignUpInfo;
+import com.tglm.bbs.dto.SignInfo;
 import com.tglm.bbs.entities.Session;
 import com.tglm.bbs.entities.User;
 import com.tglm.bbs.exception.ServiceException;
@@ -43,36 +42,33 @@ public class UserService {
         this.redisUtil = redisUtil;
     }
 
-    public String signUp(SignUpInfo signUpInfo) throws ServiceException {
-
-        String role = "user";
-        signUpInfo.setRole(role);
+    public String signUp(SignInfo signInfo) throws ServiceException {
 
 
         String regex = "^[a-zA-Z][a-zA-Z0-9_]{5,17}$";
 
-        if (userMapper.findByUsername(signUpInfo.getUsername()) != null) {
+        if (userMapper.findByUsername(signInfo.getUsername()) != null) {
             throw ServiceException.forCodeAndMessage(ServiceException.USERNAME_HAS_EXISTED, "用户名已存在");
 
         }
-        if (!signUpInfo.getUsername().matches(regex)) {
+        if (!signInfo.getUsername().matches(regex)) {
             throw ServiceException.forCodeAndMessage(ServiceException.WRONG_FORMAT, "用户名格式错误");
         }
 
 
-        userMapper.saveUser(new User(signUpInfo.getUsername(),null,signUpInfo.getPassword(),null));
+        userMapper.saveUser(new User(signInfo.getUsername(),null, signInfo.getPassword(),null));
         return "注册成功";
 
     }
 
 
-    public Session login(LoginInfo loginInfo) throws ServiceException {
-        String username = loginInfo.getUsername();
+    public Session login(SignInfo signInfo) throws ServiceException {
+        String username = signInfo.getUsername();
         if (userMapper.findByUsername(username) == null) {
             throw ServiceException.forCodeAndMessage(ServiceException.NO_SUCH_USERNAME, "用户名不存在");
         }
         Long id = userMapper.findByUsername(username).getUserId();
-        User user = new User(username, id, loginInfo.getPassword(), null);
+        User user = new User(username, id, signInfo.getPassword(), null);
 
         if (user.getPassword().equals(userMapper.findByUsername(user.getUsername()).getPassword())) {
 
