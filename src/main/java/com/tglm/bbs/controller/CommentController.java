@@ -16,7 +16,7 @@ import java.util.List;
  * @author mlgt
  * @date 2019/9/8
  */
-@RestController("/comment")
+@RestController("comment")
 public class CommentController {
 
     private final CommentService commentService;
@@ -26,18 +26,18 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @PostMapping("/saveComment")
+    @PostMapping("saveComment")
     public void saveComment(@RequestBody CommentInfo commentInfo) throws ParseException, ServiceException {
          commentService.saveComment(commentInfo);
     }
 
-    @GetMapping("/getComment")
+    @GetMapping("getComment")
     public List<CommentInfo> getComment(Long postId) throws ServiceException {
         return commentService.getCommentInfo(postId);
 
     }
 
-    @GetMapping("/deleteComment")
+    @GetMapping("deleteComment")
     public String deleteComment(Long postId) throws ServiceException {
         return commentService.deleteCommentByPostId(postId);
     }

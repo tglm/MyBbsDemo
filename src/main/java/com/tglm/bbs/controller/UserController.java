@@ -17,7 +17,7 @@ import java.io.IOException;
  */
 @RestController
 @ResponseBody
-@RequestMapping(value = "/user")
+@RequestMapping(value = "user")
 public class UserController {
 
     private final UserService userService;
@@ -27,13 +27,13 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/signUp")
+    @PostMapping("signUp")
     public String signUp(@RequestBody SignInfo signInfo) throws ServiceException {
 
         return userService.signUp(signInfo);
     }
 
-    @PostMapping("/login")
+    @PostMapping("login")
     public Session login(@RequestBody SignInfo signInfo) throws ServiceException {
 
         return userService.login(signInfo);
@@ -47,6 +47,16 @@ public class UserController {
 
         return userService.uploadAvatar(file);
 
+    }
+
+    @GetMapping("getAvatar")
+    public void getAvatar(@RequestParam Long userId){
+
+    }
+
+    @GetMapping("resetPassword")
+    public String resetPassword(@RequestBody SignInfo signInfo){
+        return userService.resetPassword(signInfo);
     }
 
 }

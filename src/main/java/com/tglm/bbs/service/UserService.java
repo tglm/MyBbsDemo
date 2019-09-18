@@ -5,6 +5,7 @@ import com.tglm.bbs.Util.RequestUtil;
 import com.tglm.bbs.Util.SessionUtil;
 import com.tglm.bbs.dao.UserMapper;
 import com.tglm.bbs.dto.SignInfo;
+import com.tglm.bbs.dto.UserInfo;
 import com.tglm.bbs.entities.Session;
 import com.tglm.bbs.entities.User;
 import com.tglm.bbs.exception.ServiceException;
@@ -26,21 +27,18 @@ import java.nio.file.Paths;
 public class UserService {
     @Value("Users/moon/bbs/avatars")
     private String avatarRootPath;
-
     private SessionUtil sessionUtil;
     private UserMapper userMapper;
     private final RedisUtil redisUtil;
+
+    @Autowired
     public UserService(SessionUtil sessionUtil, UserMapper userMapper, RedisUtil redisUtil) {
         this.sessionUtil = sessionUtil;
         this.userMapper = userMapper;
         this.redisUtil = redisUtil;
     }
 
-    @Autowired
-    public UserService(UserMapper userMapper, RedisUtil redisUtil) {
-        this.userMapper = userMapper;
-        this.redisUtil = redisUtil;
-    }
+
 
     public String signUp(SignInfo signInfo) throws ServiceException {
 
@@ -88,4 +86,22 @@ public class UserService {
 
         return "上传成功";
     }
+
+    public String resetPassword(SignInfo signInfo) throws ServiceException {
+
+        if (userMapper.findByUsername(signInfo.getUsername()) == null) {
+            throw ServiceException.forCodeAndMessage(ServiceException.NO_SUCH_USERNAME, "用户不存在");
+        }
+
+            userMapper.updatePasswordByUsername(signInfo.getUsername(), signInfo.getPassword());
+
+            return "重置密码成功";
+
+    }
+
+    public void getAvatar(Long userId){
+
+
+    }
+
 }

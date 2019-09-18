@@ -17,7 +17,7 @@ import java.text.ParseException;
  * @author mlgt
  * @date 2019/9/8
  */
-@RestController("/post")
+@RestController("post")
 public class PostController {
     private final PostService postService;
 
@@ -28,14 +28,14 @@ public class PostController {
     }
 
 
-    @GetMapping("/list")
+    @GetMapping("list")
     public Page<PostInfo> listAll() throws ServiceException {
         return postService.listAll();
 
     }
 
     @Permit("user")
-    @PostMapping("/savePost")
+    @PostMapping("savePost")
     public String post(@RequestBody PostInfo postInfo) throws ServiceException, ParseException {
 
         return postService.post(postInfo);
@@ -43,7 +43,7 @@ public class PostController {
 
 
     @Permit("user")
-    @PostMapping("/updatePost")
+    @PostMapping("updatePost")
     public String updatePost(@RequestBody PostInfo postInfo) throws ServiceException, ParseException {
 
         return postService.updatePost(postInfo);
@@ -51,7 +51,7 @@ public class PostController {
     }
 
     @Permit("admin")
-    @GetMapping("/deletePost")
+    @GetMapping("deletePost")
     public String deletePost(Long postId){
         return postService.deletePost(postId);
     }

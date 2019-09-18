@@ -2,10 +2,7 @@ package com.tglm.bbs.dao;
 
 import com.tglm.bbs.Util.PageArgs;
 import com.tglm.bbs.entities.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Repository;
 
@@ -42,5 +39,8 @@ public interface UserMapper {
      */
     @Select("SELECT * FROM bbs.user")
     Page<User> findAll(PageArgs pageArgs);
+
+    @Update("UPDATE bbs.user SET username = #{username} ")
+    void updatePasswordByUsername(String password,String username);
 
 }
