@@ -1,7 +1,5 @@
 package com.tglm.bbs.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.tglm.bbs.dto.PostInfo;
 import com.tglm.bbs.exception.ServiceException;
 import com.tglm.bbs.permission.Permit;
@@ -38,18 +36,15 @@ public class PostController {
 
     @Permit("user")
     @PostMapping("/savePost")
-    public String post(@RequestBody JSONObject postInfoParam) throws ServiceException, ParseException {
-        JSONObject postInfoJson = postInfoParam.getJSONObject("postInfo");
-        PostInfo postInfo = JSON.toJavaObject(postInfoJson,PostInfo.class);
+    public String post(@RequestBody PostInfo postInfo) throws ServiceException, ParseException {
+
         return postService.post(postInfo);
     }
 
 
     @Permit("user")
     @PostMapping("/updatePost")
-    public String updatePost(@RequestBody JSONObject postInfoParam) throws ServiceException, ParseException {
-        JSONObject postInfoJson = postInfoParam.getJSONObject("postInfo");
-        PostInfo postInfo = JSON.toJavaObject(postInfoJson,PostInfo.class);
+    public String updatePost(@RequestBody PostInfo postInfo) throws ServiceException, ParseException {
 
         return postService.updatePost(postInfo);
 

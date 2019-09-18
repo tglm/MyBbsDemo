@@ -1,7 +1,5 @@
 package com.tglm.bbs.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.tglm.bbs.dto.SignInfo;
 import com.tglm.bbs.entities.Session;
 import com.tglm.bbs.exception.ServiceException;
@@ -30,16 +28,14 @@ public class UserController {
     }
 
     @PostMapping("/signUp")
-    public String signUp(@RequestBody JSONObject signInfoParam) throws ServiceException {
-        JSONObject signInfoJson = signInfoParam.getJSONObject("signInfo");
-        SignInfo signInfo = JSON.toJavaObject(signInfoJson,SignInfo.class);
+    public String signUp(@RequestBody SignInfo signInfo) throws ServiceException {
+
         return userService.signUp(signInfo);
     }
 
     @PostMapping("/login")
-    public Session login(@RequestBody JSONObject signInfoParam) throws ServiceException {
-        JSONObject signInfoJson = signInfoParam.getJSONObject("signInfo");
-        SignInfo signInfo = JSON.toJavaObject(signInfoJson,SignInfo.class);
+    public Session login(@RequestBody SignInfo signInfo) throws ServiceException {
+
         return userService.login(signInfo);
 
 
