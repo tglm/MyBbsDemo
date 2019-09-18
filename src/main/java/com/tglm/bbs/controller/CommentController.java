@@ -5,6 +5,8 @@ import com.tglm.bbs.exception.ServiceException;
 import com.tglm.bbs.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
@@ -24,8 +26,8 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @GetMapping("/saveComment")
-    public void saveComment(CommentInfo commentInfo) throws ParseException {
+    @PostMapping("/saveComment")
+    public void saveComment(@RequestBody CommentInfo commentInfo) throws ParseException, ServiceException {
         commentService.saveComment(commentInfo);
     }
 
@@ -35,7 +37,7 @@ public class CommentController {
 
     }
 
-    @GetMapping("/deletePost")
+    @GetMapping("/deleteComment")
     public String deleteComment(Long postId) throws ServiceException {
         return commentService.deleteCommentByPostId(postId);
     }

@@ -26,7 +26,10 @@ public class CommentService {
     }
 
 
-    public void saveComment(CommentInfo commentInfo) throws ParseException {
+    public void saveComment(CommentInfo commentInfo) throws ParseException, ServiceException {
+        if(commentInfo.getContent() == null){
+            throw ServiceException.forCodeAndMessage(ServiceException.NULL_PARAMETER_ERROR,"评论不能为空");
+        }
         Comment comment = new Comment(commentInfo);
         commentMapper.saveComment(comment);
 

@@ -7,6 +7,8 @@ import com.tglm.bbs.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
@@ -33,22 +35,23 @@ public class PostController {
     }
 
     @Permit("user")
-    @GetMapping("/post")
-    public String post(PostInfo postInfo) throws ServiceException, ParseException {
+    @PostMapping("/savePost")
+    public String post(@RequestBody PostInfo postInfo) throws ServiceException, ParseException {
         return postService.post(postInfo);
     }
 
 
     @Permit("user")
-    @GetMapping("/updatePost")
-    public String updatePost(PostInfo postInfo) throws ServiceException, ParseException {
+    @PostMapping("/updatePost")
+    public String updatePost(@RequestBody PostInfo postInfo) throws ServiceException, ParseException {
         return postService.updatePost(postInfo);
 
     }
 
-    @GetMapping("/deletPost")
-    public String deletePost(PostInfo postInfo) throws ServiceException, ParseException {
-        return postService.deletePost(postInfo);
+    @Permit("admin")
+    @GetMapping("/deletePost")
+    public String deletePost(Long postId){
+        return postService.deletePost(postId);
     }
 
 }

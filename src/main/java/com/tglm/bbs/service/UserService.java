@@ -85,12 +85,11 @@ public class UserService {
     }
 
 
-    @Upload(file = "avatar",maxfileSize = 1024*1024*5,maxfile = 1)
+    @Upload(file = "avatar",extension = {"jpg","png"},maxfileSize = 1024*1024*5,maxfile = 1)
     public String uploadAvatar(MultipartFile file) throws IOException {
         Path avatarPath = Paths.get(avatarRootPath + redisUtil.getSession(RequestUtil.getHeaderInfo().getSessionId()).getUsername());
         file.transferTo(avatarPath);
 
         return "上传成功";
     }
-
 }

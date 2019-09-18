@@ -58,11 +58,9 @@ public class PostService {
 
     }
 
-    public String deletePost(PostInfo postInfo) throws ServiceException, ParseException {
-        if(postInfo == null){
-            throw ServiceException.forCode(ServiceException.NULL_PARAMETER_ERROR);
-        }
-        Post post = new Post(postInfo);
+    public String deletePost(Long postId){
+
+        Post post = postMapper.findPostByPostId(postId);
 
         if(post.isTopic()){
             Long tempId = post.getPostId();

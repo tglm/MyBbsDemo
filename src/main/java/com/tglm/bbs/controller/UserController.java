@@ -4,6 +4,7 @@ import com.tglm.bbs.dto.LoginInfo;
 import com.tglm.bbs.dto.SignUpInfo;
 import com.tglm.bbs.entities.Session;
 import com.tglm.bbs.exception.ServiceException;
+import com.tglm.bbs.permission.Permit;
 import com.tglm.bbs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "/signUp", method = RequestMethod.GET)
+    @PostMapping("/signUp")
     public String signUp(@RequestBody SignUpInfo signUpInfo) throws ServiceException {
         return userService.signUp(signUpInfo);
     }
@@ -39,16 +40,12 @@ public class UserController {
 
     }
 
+    @Permit("user")
     @PostMapping("uploadAvatar")
     public String uploadAvatar (@RequestBody MultipartFile file) throws IOException {
 
         return userService.uploadAvatar(file);
 
     }
-
-
-
-
-
 
 }
