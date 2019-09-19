@@ -5,7 +5,6 @@ import com.tglm.bbs.Util.RequestUtil;
 import com.tglm.bbs.Util.SessionUtil;
 import com.tglm.bbs.dao.UserMapper;
 import com.tglm.bbs.dto.SignInfo;
-import com.tglm.bbs.dto.UserInfo;
 import com.tglm.bbs.entities.Session;
 import com.tglm.bbs.entities.User;
 import com.tglm.bbs.exception.ServiceException;
@@ -15,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -81,9 +81,11 @@ public class UserService {
 
     @Upload(file = "avatar",extension = {"jpg","png"},maxfileSize = 1024*1024*5,maxfile = 1)
     public String uploadAvatar(MultipartFile file) throws IOException {
-        Path avatarPath = Paths.get(avatarRootPath + redisUtil.getSession(RequestUtil.getHeaderInfo().getSessionId()).getUsername());
+        String username = redisUtil.getSession(RequestUtil.getHeaderInfo().getSessionId()).getUsername();
+        new File(avatarRootPath + File.separator + username).delete();
+        Path avatarPath = Paths.get(avatarRootPath + File.separator + username);
         file.transferTo(avatarPath);
-
+        userMapper.updateAvatarByUsername(avatarPath.toString(),username);
         return "上传成功";
     }
 

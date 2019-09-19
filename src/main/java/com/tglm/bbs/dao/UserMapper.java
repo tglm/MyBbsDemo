@@ -37,10 +37,25 @@ public interface UserMapper {
      * @param pageArgs (Integer pageNum,Integer pageSize)
      * @return Page<User> 分页User实体
      */
-    @Select("SELECT * FROM bbs.user")
+    @Select("SELECT * FROM bbs.user;")
     Page<User> findAll(PageArgs pageArgs);
 
-    @Update("UPDATE bbs.user SET username = #{username} ")
-    void updatePasswordByUsername(String password,String username);
+    /**
+     * 改密码
+     *
+     * @param password 新改的密码
+     * @param username 用户名
+     */
+    @Update("UPDATE bbs.user SET password = #{password} WHERE username = #{username};")
+    void updatePasswordByUsername(String password, String username);
+
+    /**
+     * 上传头像
+     *
+     * @param avatar 头像地址
+     * @param username 用户名
+     */
+    @Update("UPDATE bbs.user SET avatar = #{avatar} WHERE username = #{username};")
+    void updateAvatarByUsername(String avatar, String username);
 
 }

@@ -38,7 +38,6 @@ public class UserController {
 
         return userService.login(signInfo);
 
-
     }
 
     @Permit("user")
@@ -55,7 +54,7 @@ public class UserController {
     }
 
     @GetMapping("resetPassword")
-    public String resetPassword(@RequestBody SignInfo signInfo){
+    public String resetPassword(@RequestBody SignInfo signInfo) throws ServiceException {
         return userService.resetPassword(signInfo);
     }
 
