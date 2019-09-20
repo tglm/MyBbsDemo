@@ -17,6 +17,14 @@ import java.io.IOException;
  */
 public class FileUtil {
 
+
+    private static String getExtension(){
+
+
+
+    }
+
+
     public static void responseWithFile(String filePath) throws IOException, ServiceException {
         HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
         if(response == null){
@@ -29,18 +37,33 @@ public class FileUtil {
             servletOutputStream.write(buffer);
         }
         fileInputStream.close();
-        response.addHeader(HttpHeaders.CONTENT_TYPE,);
+        response.addHeader(HttpHeaders.CONTENT_TYPE,toContentType(getExtension()));
 
     }
 
-    private String getContentType(String fileName){
-        int index = fileName.lastIndexOf('.') + 1;
-        String extension = fileName.substring(index);
-        switch (extension.toLowerCase()){
+    private static String toContentType(String extension) {
+        String res ;
+
+        switch (extension.toLowerCase()) {
             case "jpg":
-
-
+                res = "application/x-jpg";
+                break;
+            case "jpeg":
+                res = "image/jpeg";
+                break;
+            case "bmp":
+                res = "application/x-bmp";
+                break;
+            case "png":
+                res = "image/png";
+                break;
+            case "gif":
+                res = "image/gif";
+                break;
+            default:
+                res = "application/octet-stream";
         }
-
+        return res;
     }
+
 }
