@@ -67,4 +67,5 @@ public interface UserMapper {
     @Select("SELECT * FROM bbs.user WHERE user_id = #{userId};")
     User findByUserId(Long userId);
 
+
 }
