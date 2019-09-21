@@ -7,7 +7,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.ws.spi.http.HttpContext;
 import java.io.FileInputStream;
 import java.io.IOException;
 
@@ -18,8 +17,8 @@ import java.io.IOException;
 public class FileUtil {
 
 
-    private static String getExtension(){
-
+    private static String getExtension(String filename){
+        return filename.substring(filename.lastIndexOf('.')+1);
 
 
     }
@@ -37,7 +36,7 @@ public class FileUtil {
             servletOutputStream.write(buffer);
         }
         fileInputStream.close();
-        response.addHeader(HttpHeaders.CONTENT_TYPE,toContentType(getExtension()));
+        response.addHeader(HttpHeaders.CONTENT_TYPE,toContentType(getExtension(filePath)));
 
     }
 

@@ -1,5 +1,6 @@
 package com.tglm.bbs.service;
 
+import com.tglm.bbs.Util.FileUtil;
 import com.tglm.bbs.Util.RedisUtil;
 import com.tglm.bbs.Util.RequestUtil;
 import com.tglm.bbs.Util.SessionUtil;
@@ -101,8 +102,9 @@ public class UserService {
 
     }
 
-    public void getAvatar(Long userId){
-
+    public void getAvatar(Long userId) throws IOException, ServiceException {
+        String avatarPath = userMapper.findByUserId(userId).getAvatar();
+        FileUtil.responseWithFile(avatarPath);
 
     }
 

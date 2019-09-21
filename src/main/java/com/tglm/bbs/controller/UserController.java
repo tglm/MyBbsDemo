@@ -49,8 +49,8 @@ public class UserController {
     }
 
     @GetMapping("getAvatar")
-    public void getAvatar(@RequestParam Long userId){
-
+    public void getAvatar(@RequestParam Long userId) throws IOException, ServiceException {
+        userService.getAvatar(userId);
     }
 
     @GetMapping("resetPassword")

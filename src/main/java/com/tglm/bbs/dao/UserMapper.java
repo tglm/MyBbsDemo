@@ -58,4 +58,13 @@ public interface UserMapper {
     @Update("UPDATE bbs.user SET avatar = #{avatar} WHERE username = #{username};")
     void updateAvatarByUsername(String avatar, String username);
 
+    /**
+     * get user
+     *
+     * @param userId Long
+     * @return User entity
+     */
+    @Select("SELECT * FROM bbs.user WHERE user_id = #{userId};")
+    User findByUserId(Long userId);
+
 }
