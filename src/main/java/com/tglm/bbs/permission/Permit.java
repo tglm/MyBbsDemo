@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface Permit {
-    String role() default "user";
+    String role() default "";
     String value() default "";
 
 

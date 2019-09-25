@@ -37,7 +37,6 @@ public class PostController {
     @Permit("user")
     @PostMapping("savePost")
     public String post(@RequestBody PostInfo postInfo) throws ServiceException, ParseException {
-
         return postService.post(postInfo);
     }
 

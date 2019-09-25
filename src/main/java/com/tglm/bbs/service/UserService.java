@@ -26,7 +26,7 @@ import java.nio.file.Paths;
  */
 @Service
 public class UserService {
-    @Value("Users/moon/bbs/avatars")
+    @Value("D:/test/bbs/avatars")
     private String avatarRootPath;
     private SessionUtil sessionUtil;
     private UserMapper userMapper;
@@ -85,7 +85,11 @@ public class UserService {
         String username = redisUtil.getSession(RequestUtil.getHeaderInfo().getSessionId()).getUsername();
         new File(avatarRootPath + File.separator + username).delete();
         Path avatarPath = Paths.get(avatarRootPath + File.separator + username);
-        file.transferTo(avatarPath);
+        File avatarFile = new File(avatarRootPath + File.separator + username);
+        if (!avatarFile.exists()) {
+            avatarFile.mkdirs();
+        }
+        file.transferTo(new File(avatarPath + File.separator + file.getName() + "." + FileUtil.getExtension(file.getName())));
         userMapper.updateAvatarByUsername(avatarPath.toString(),username);
         return "上传成功";
     }

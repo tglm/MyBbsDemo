@@ -26,6 +26,7 @@ public class PermissionAspect {
 
     @Before("@annotation(permit)")
     public void permissionCheck(Permit permit) throws ServiceException {
+        if("".equals(permit.role())){return;}
 
         Session session = redisUtil.getSession(RequestUtil.getHeaderInfo().getSessionId());
 

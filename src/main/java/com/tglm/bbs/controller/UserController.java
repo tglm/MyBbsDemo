@@ -17,7 +17,7 @@ import java.io.IOException;
  */
 @RestController
 @ResponseBody
-@RequestMapping(value = "user")
+@RequestMapping("user")
 public class UserController {
 
     private final UserService userService;
@@ -53,7 +53,8 @@ public class UserController {
         userService.getAvatar(userId);
     }
 
-    @GetMapping("resetPassword")
+    @Permit("user")
+    @PostMapping("resetPassword")
     public String resetPassword(@RequestBody SignInfo signInfo) throws ServiceException {
         return userService.resetPassword(signInfo);
     }

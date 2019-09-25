@@ -1,14 +1,14 @@
 package com.tglm.bbs.upload;
 
-import com.tglm.bbs.Util.RedisUtil;
-import com.tglm.bbs.Util.RequestUtil;
 import com.tglm.bbs.exception.ServiceException;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
@@ -23,18 +23,15 @@ import java.util.Objects;
 @Component
 public class UploadAspect {
 
-    private final RedisUtil redisUtil;
 
-    @Autowired
-    public UploadAspect(RedisUtil redisUtil) {
-        this.redisUtil = redisUtil;
-    }
 
     @Before("@annotation(upload)")
     public void fileCheck(Upload upload) throws ServiceException {
-        HttpServletRequest request = RequestUtil.getRequest();
-        MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
-        List<MultipartFile> files = multiRequest.getFiles("avatar");
+
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+        StandardServletMultipartResolver resolver = new StandardServletMultipartResolver();
+        MultipartHttpServletRequest multipartHttpServletRequest = resolver.resolveMultipart(request);
+        List<MultipartFile> files = multipartHttpServletRequest.getFiles("avatar");
 
 
         if (upload.maxfile() > 0 && files.size() > upload.maxfile()) {

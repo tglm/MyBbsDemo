@@ -17,7 +17,7 @@ import java.io.IOException;
 public class FileUtil {
 
 
-    private static String getExtension(String filename){
+    public static String getExtension(String filename){
         return filename.substring(filename.lastIndexOf('.')+1);
 
 

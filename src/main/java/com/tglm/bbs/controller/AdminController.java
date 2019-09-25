@@ -1,12 +1,7 @@
 package com.tglm.bbs.controller;
 
-import com.tglm.bbs.dto.UserInfo;
-import com.tglm.bbs.exception.ServiceException;
-import com.tglm.bbs.permission.Permit;
 import com.tglm.bbs.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -24,22 +19,6 @@ public class AdminController {
     }
 
 
-    /**
-     * @param username string
-     * @return UserInfo
-     * @throws ServiceException z找不到用户1006
-     */
-    @GetMapping("search")
-    @Permit(role = "admin")
-    public UserInfo search(String username) throws ServiceException {
-        return adminService.search(username);
-    }
-
-    @GetMapping
-    @Permit("admin")
-    public Page<UserInfo> list(){
-        return adminService.list();
-    }
 
 
 
