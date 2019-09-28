@@ -19,8 +19,6 @@ public class FileUtil {
 
     public static String getExtension(String filename){
         return filename.substring(filename.lastIndexOf('.')+1);
-
-
     }
 
 

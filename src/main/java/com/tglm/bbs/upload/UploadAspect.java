@@ -29,6 +29,7 @@ public class UploadAspect {
     public void fileCheck(Upload upload) throws ServiceException {
 
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+
         StandardServletMultipartResolver resolver = new StandardServletMultipartResolver();
         MultipartHttpServletRequest multipartHttpServletRequest = resolver.resolveMultipart(request);
         List<MultipartFile> files = multipartHttpServletRequest.getFiles("avatar");

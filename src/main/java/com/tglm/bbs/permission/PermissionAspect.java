@@ -3,7 +3,7 @@ package com.tglm.bbs.permission;
 import com.tglm.bbs.Util.RedisUtil;
 import com.tglm.bbs.Util.RequestUtil;
 import com.tglm.bbs.Util.SessionUtil;
-import com.tglm.bbs.entities.Session;
+import com.tglm.bbs.request.Session;
 import com.tglm.bbs.exception.ServiceException;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;

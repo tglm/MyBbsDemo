@@ -1,4 +1,4 @@
-package com.tglm.bbs.entities;
+package com.tglm.bbs.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

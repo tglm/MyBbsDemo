@@ -1,7 +1,7 @@
 package com.tglm.bbs.controller;
 
 import com.tglm.bbs.dto.SignInfo;
-import com.tglm.bbs.entities.Session;
+import com.tglm.bbs.request.Session;
 import com.tglm.bbs.exception.ServiceException;
 import com.tglm.bbs.permission.Permit;
 import com.tglm.bbs.service.UserService;

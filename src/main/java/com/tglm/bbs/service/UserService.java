@@ -1,12 +1,10 @@
 package com.tglm.bbs.service;
 
-import com.tglm.bbs.Util.FileUtil;
-import com.tglm.bbs.Util.RedisUtil;
-import com.tglm.bbs.Util.RequestUtil;
-import com.tglm.bbs.Util.SessionUtil;
+import com.tglm.bbs.Util.*;
 import com.tglm.bbs.dao.UserMapper;
 import com.tglm.bbs.dto.SignInfo;
-import com.tglm.bbs.entities.Session;
+import com.tglm.bbs.dto.UserInfo;
+import com.tglm.bbs.request.Session;
 import com.tglm.bbs.entities.User;
 import com.tglm.bbs.exception.ServiceException;
 import com.tglm.bbs.upload.Upload;
@@ -109,6 +107,19 @@ public class UserService {
     public void getAvatar(Long userId) throws IOException, ServiceException {
         String avatarPath = userMapper.findByUserId(userId).getAvatar();
         FileUtil.responseWithFile(avatarPath);
+
+    }
+    /**
+     * @param username string
+     * @return userinfo
+     * @throws ServiceException 找不到用户
+     */
+    public UserInfo search(String username) throws ServiceException {
+        User user = userMapper.findByUsername(username);
+        if (user == null) {
+            throw ServiceException.forCodeAndMessage(ServiceException.NO_SUCH_USERNAME, "用户不存在");
+        }
+        return InfoUtil.toUserInfo(user);
 
     }
 
