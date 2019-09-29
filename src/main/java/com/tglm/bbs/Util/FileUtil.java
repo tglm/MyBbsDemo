@@ -40,7 +40,6 @@ public class FileUtil {
 
     private static String toContentType(String extension) {
         String res ;
-
         switch (extension.toLowerCase()) {
             case "jpg":
                 res = "application/x-jpg";

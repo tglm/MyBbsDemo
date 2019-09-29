@@ -1,6 +1,8 @@
 package com.tglm.bbs.controller;
 
 import com.tglm.bbs.dto.SignInfo;
+import com.tglm.bbs.dto.UserInfo;
+import com.tglm.bbs.refresh.Refresh;
 import com.tglm.bbs.request.Session;
 import com.tglm.bbs.exception.ServiceException;
 import com.tglm.bbs.permission.Permit;
@@ -41,22 +43,32 @@ public class UserController {
     }
 
     @Permit("user")
+    @Refresh
     @PostMapping("uploadAvatar")
-    public String uploadAvatar (@RequestBody MultipartFile file) throws IOException {
+    public String uploadAvatar (@RequestBody MultipartFile file) throws IOException, ServiceException {
 
         return userService.uploadAvatar(file);
 
     }
 
     @GetMapping("getAvatar")
+    @Refresh
     public void getAvatar(@RequestParam Long userId) throws IOException, ServiceException {
         userService.getAvatar(userId);
     }
 
     @Permit("user")
+    @Refresh
     @PostMapping("resetPassword")
     public String resetPassword(@RequestBody SignInfo signInfo) throws ServiceException {
         return userService.resetPassword(signInfo);
+    }
+
+    @Refresh
+    @GetMapping("search")
+    public UserInfo search(String username) throws ServiceException {
+        return userService.search(username);
+
     }
 
 }

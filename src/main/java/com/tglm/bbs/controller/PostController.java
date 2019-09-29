@@ -3,6 +3,7 @@ package com.tglm.bbs.controller;
 import com.tglm.bbs.dto.PostInfo;
 import com.tglm.bbs.exception.ServiceException;
 import com.tglm.bbs.permission.Permit;
+import com.tglm.bbs.refresh.Refresh;
 import com.tglm.bbs.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -36,6 +37,7 @@ public class PostController {
 
     @Permit("user")
     @PostMapping("savePost")
+    @Refresh
     public String post(@RequestBody PostInfo postInfo) throws ServiceException, ParseException {
         return postService.post(postInfo);
     }
@@ -43,6 +45,7 @@ public class PostController {
 
     @Permit("user")
     @PostMapping("updatePost")
+    @Refresh
     public String updatePost(@RequestBody PostInfo postInfo) throws ServiceException, ParseException {
 
         return postService.updatePost(postInfo);

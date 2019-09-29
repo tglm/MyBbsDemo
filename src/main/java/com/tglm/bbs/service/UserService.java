@@ -79,15 +79,17 @@ public class UserService {
 
 
     @Upload(file = "avatar",extension = {"jpg","png"},maxfileSize = 1024*1024*5,maxfile = 1)
-    public String uploadAvatar(MultipartFile file) throws IOException {
+    public String uploadAvatar(MultipartFile file) throws IOException, ServiceException {
         String username = redisUtil.getSession(RequestUtil.getHeaderInfo().getSessionId()).getUsername();
         new File(avatarRootPath + File.separator + username).delete();
         Path avatarPath = Paths.get(avatarRootPath + File.separator + username);
         File avatarFile = new File(avatarRootPath + File.separator + username);
         if (!avatarFile.exists()) {
-            avatarFile.mkdirs();
+            if(!avatarFile.mkdirs()){
+                throw ServiceException.forCodeAndMessage(ServiceException.MKDIR_FAILED,"文件夹已存在");
+            }
         }
-        file.transferTo(new File(avatarPath + File.separator + file.getName() + "." + FileUtil.getExtension(file.getName())));
+        file.transferTo(new File(avatarPath + File.separator + file.getName() ));
         userMapper.updateAvatarByUsername(avatarPath.toString(),username);
         return "上传成功";
     }
@@ -97,9 +99,7 @@ public class UserService {
         if (userMapper.findByUsername(signInfo.getUsername()) == null) {
             throw ServiceException.forCodeAndMessage(ServiceException.NO_SUCH_USERNAME, "用户不存在");
         }
-
             userMapper.updatePasswordByUsername(signInfo.getUsername(), signInfo.getPassword());
-
             return "重置密码成功";
 
     }
@@ -111,7 +111,7 @@ public class UserService {
     }
     /**
      * @param username string
-     * @return userinfo
+     * @return userInfo
      * @throws ServiceException 找不到用户
      */
     public UserInfo search(String username) throws ServiceException {

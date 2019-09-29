@@ -20,6 +20,7 @@ public class ServiceException extends Exception {
     public static final int TOO_MANY_FILES = 1009;
     public static final int NULL_PARAMETER_ERROR = 1010;
     public static final int NULL_RESPONSE_ERROR = 1011;
+    public static final int MKDIR_FAILED = 1012;
 
 
 

@@ -1,6 +1,7 @@
 package com.tglm.bbs.Util;
 
 import com.tglm.bbs.request.Session;
+import com.tglm.bbs.request.ThreadContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -29,7 +30,9 @@ public class RedisUtil {
         redisTemplate.opsForValue().set(session.getSessionId(), session);
     }
 
-    public void updateSession(Session session) {
+    public void updateSession() {
+        ThreadLocal<ThreadContext> threadContextThreadLocal = new ThreadLocal<>();
+        Session session = threadContextThreadLocal.get().getSession();
         Date date = new Date();
         date.setTime(System.currentTimeMillis());
         session.setLastAccessTime(date);
