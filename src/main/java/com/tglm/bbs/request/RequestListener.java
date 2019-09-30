@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 @Component
 public class RequestListener implements ServletRequestListener {
 
-    ThreadLocal<ThreadContext> threadContextThreadLocal = new ThreadLocal<>();
+    private ThreadLocal<ThreadContext> threadContextThreadLocal = new ThreadLocal<>();
 
     final private RedisTemplate redisTemplate;
 
