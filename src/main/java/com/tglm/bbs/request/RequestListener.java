@@ -1,7 +1,7 @@
 package com.tglm.bbs.request;
 
-import com.tglm.bbs.Util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletRequestEvent;
@@ -17,6 +17,12 @@ public class RequestListener implements ServletRequestListener {
 
     ThreadLocal<ThreadContext> threadContextThreadLocal = new ThreadLocal<>();
 
+    final private RedisTemplate redisTemplate;
+
+    @Autowired
+    public RequestListener(RedisTemplate redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
 
     @Override
     public void requestDestroyed(ServletRequestEvent sre) {
@@ -26,10 +32,9 @@ public class RequestListener implements ServletRequestListener {
     @Override
     public void requestInitialized(ServletRequestEvent sre) {
         HttpServletRequest request = (HttpServletRequest) sre.getServletRequest();
-        String sessionId = request.getParameter("sessionId");
+        String sessionId = (String) request.getAttribute("sessionId");
+        Session session = (Session) redisTemplate.opsForValue().get(sessionId);
         ThreadContext threadContext = new ThreadContext();
-        //怎么拿到Session呢
-        Session session =
         threadContext.setSession(session);
         threadContextThreadLocal.set(threadContext);
 
