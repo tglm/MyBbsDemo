@@ -1,6 +1,6 @@
 package com.tglm.bbs.service;
 
-import com.tglm.bbs.Util.*;
+import com.tglm.bbs.util.*;
 import com.tglm.bbs.dao.UserMapper;
 import com.tglm.bbs.dto.SignInfo;
 import com.tglm.bbs.dto.UserInfo;

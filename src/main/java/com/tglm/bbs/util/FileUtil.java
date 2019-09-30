@@ -1,4 +1,4 @@
-package com.tglm.bbs.Util;
+package com.tglm.bbs.util;
 
 import com.tglm.bbs.exception.ServiceException;
 import org.springframework.http.HttpHeaders;
@@ -9,6 +9,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * @author mlgt
@@ -23,7 +24,7 @@ public class FileUtil {
 
 
     public static void responseWithFile(String filePath) throws IOException, ServiceException {
-        HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
+        HttpServletResponse response = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getResponse();
         if(response == null){
             throw ServiceException.forCodeAndMessage(ServiceException.NULL_RESPONSE_ERROR,"NULL_RESPONSE_ERROR");
         }

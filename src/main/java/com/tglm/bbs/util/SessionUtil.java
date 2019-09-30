@@ -1,10 +1,9 @@
-package com.tglm.bbs.Util;
+package com.tglm.bbs.util;
 
 
 import com.tglm.bbs.entities.Admin;
-import com.tglm.bbs.request.Session;
 import com.tglm.bbs.entities.User;
-import com.tglm.bbs.request.ThreadContext;
+import com.tglm.bbs.request.Session;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -78,10 +77,6 @@ public class SessionUtil {
         }
 
         redisUtil.save(session);
-        ThreadLocal<ThreadContext> threadLocal = new ThreadLocal<>();
-        ThreadContext threadContext = new ThreadContext();
-        threadContext.setSession(session);
-        threadLocal.set(threadContext);
         return session;
 
     }

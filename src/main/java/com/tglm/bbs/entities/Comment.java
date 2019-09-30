@@ -1,6 +1,6 @@
 package com.tglm.bbs.entities;
 
-import com.tglm.bbs.Util.DateUtil;
+import com.tglm.bbs.util.DateUtil;
 import com.tglm.bbs.dto.CommentInfo;
 import lombok.NoArgsConstructor;
 
@@ -67,7 +67,7 @@ public class Comment {
     }
 
     @Basic
-    @Column(name = "former_comment", nullable = true)
+    @Column(name = "former_comment")
     public Long getFormerComment() {
         return formerComment;
     }
@@ -77,7 +77,7 @@ public class Comment {
     }
 
     @Basic
-    @Column(name = "post_id", nullable = true)
+    @Column(name = "post_id")
     public Long getPostId() {
         return postId;
     }

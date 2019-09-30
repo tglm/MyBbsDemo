@@ -1,6 +1,6 @@
 package com.tglm.bbs.entities;
 
-import com.tglm.bbs.Util.DateUtil;
+import com.tglm.bbs.util.DateUtil;
 import com.tglm.bbs.dto.PostInfo;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -76,7 +76,7 @@ public class Post {
     }
 
     @Basic
-    @Column(name = "former_post_id", nullable = true)
+    @Column(name = "former_post_id")
     public Long getFormerPostId() {
         return formerPostId;
     }
@@ -86,7 +86,7 @@ public class Post {
     }
 
     @Basic
-    @Column(name = "date_create", nullable = true)
+    @Column(name = "date_create")
     public Timestamp getDateCreate() {
         return dateCreate;
     }

@@ -1,6 +1,6 @@
 package com.tglm.bbs.service;
 
-import com.tglm.bbs.Util.InfoUtil;
+import com.tglm.bbs.util.InfoUtil;
 import com.tglm.bbs.dao.CommentMapper;
 import com.tglm.bbs.dto.CommentInfo;
 import com.tglm.bbs.entities.Comment;
@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,7 +38,7 @@ public class CommentService {
 
 
     public List<CommentInfo> getCommentInfo(Long postId) throws ServiceException {
-        List<CommentInfo> commentInfoList = null;
+        List<CommentInfo> commentInfoList = new ArrayList<>();
         List<Comment> comments = commentMapper.getComment(postId);
         if (comments == null) {
             throw ServiceException.forCode(ServiceException.NULL_PARAMETER_ERROR);

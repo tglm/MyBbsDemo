@@ -1,6 +1,6 @@
 package com.tglm.bbs.dao;
 
-import com.tglm.bbs.Util.PageArgs;
+import com.tglm.bbs.util.PageArgs;
 import com.tglm.bbs.entities.User;
 import org.apache.ibatis.annotations.*;
 import org.springframework.data.domain.Page;

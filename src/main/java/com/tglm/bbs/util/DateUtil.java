@@ -1,4 +1,4 @@
-package com.tglm.bbs.Util;
+package com.tglm.bbs.util;
 
 import java.sql.Timestamp;
 import java.text.ParseException;

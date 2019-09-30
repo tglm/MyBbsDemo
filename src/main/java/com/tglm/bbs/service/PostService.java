@@ -1,6 +1,6 @@
 package com.tglm.bbs.service;
 
-import com.tglm.bbs.Util.InfoUtil;
+import com.tglm.bbs.util.InfoUtil;
 import com.tglm.bbs.dao.PostMapper;
 import com.tglm.bbs.dto.PostInfo;
 import com.tglm.bbs.entities.Post;

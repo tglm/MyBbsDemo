@@ -1,4 +1,4 @@
-package com.tglm.bbs.Util;
+package com.tglm.bbs.util;
 
 import com.tglm.bbs.dto.CommentInfo;
 import com.tglm.bbs.dto.PostInfo;

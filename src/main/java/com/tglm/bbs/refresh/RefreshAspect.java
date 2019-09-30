@@ -1,9 +1,7 @@
 package com.tglm.bbs.refresh;
 
-import com.tglm.bbs.Util.RedisUtil;
+import com.tglm.bbs.util.RedisUtil;
 import com.tglm.bbs.exception.ServiceException;
-import com.tglm.bbs.request.Session;
-import com.tglm.bbs.request.ThreadContext;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class RefreshAspect {
-    final RedisUtil redisUtil;
+    private final RedisUtil redisUtil;
 
     @Autowired
     public RefreshAspect(RedisUtil redisUtil) {
@@ -25,7 +23,6 @@ public class RefreshAspect {
 
     @After("@annotation(refresh)")
     public void refresh(Refresh refresh) throws ServiceException {
-        Session session = ThreadContext.session();
         redisUtil.updateSession();
     }
 

@@ -1,5 +1,6 @@
-package com.tglm.bbs.Util;
+package com.tglm.bbs.util;
 
+import com.tglm.bbs.exception.ServiceException;
 import com.tglm.bbs.request.Session;
 import com.tglm.bbs.request.ThreadContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +31,10 @@ public class RedisUtil {
         redisTemplate.opsForValue().set(session.getSessionId(), session);
     }
 
-    public void updateSession() {
-        ThreadLocal<ThreadContext> threadContextThreadLocal = new ThreadLocal<>();
-        Session session = threadContextThreadLocal.get().getSession();
+    public void updateSession() throws ServiceException {
+
+
+        Session session = ThreadContext.getSession();
         Date date = new Date();
         date.setTime(System.currentTimeMillis());
         session.setLastAccessTime(date);
