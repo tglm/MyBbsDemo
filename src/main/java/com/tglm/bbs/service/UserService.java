@@ -1,13 +1,13 @@
 package com.tglm.bbs.service;
 
-import com.tglm.bbs.util.*;
 import com.tglm.bbs.dao.UserMapper;
 import com.tglm.bbs.dto.SignInfo;
 import com.tglm.bbs.dto.UserInfo;
-import com.tglm.bbs.request.Session;
 import com.tglm.bbs.entities.User;
 import com.tglm.bbs.exception.ServiceException;
+import com.tglm.bbs.request.Session;
 import com.tglm.bbs.upload.Upload;
+import com.tglm.bbs.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -15,8 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  * @author mlgt
@@ -82,15 +80,14 @@ public class UserService {
     public String uploadAvatar(MultipartFile file) throws IOException, ServiceException {
         String username = redisUtil.getSession(RequestUtil.getHeaderInfo().getSessionId()).getUsername();
         new File(avatarRootPath + File.separator + username).delete();
-        Path avatarPath = Paths.get(avatarRootPath + File.separator + username);
-        File avatarFile = new File(avatarRootPath + File.separator + username);
+        String avatarPath = avatarRootPath + File.separator + username;
+        File avatarFile = new File(avatarPath);
         if (!avatarFile.exists()) {
-            if(!avatarFile.mkdirs()){
-                throw ServiceException.forCodeAndMessage(ServiceException.MKDIR_FAILED,"文件夹已存在");
-            }
+            avatarFile.mkdirs();
         }
-        file.transferTo(new File(avatarPath + File.separator + file.getName() ));
-        userMapper.updateAvatarByUsername(avatarPath.toString(),username);
+        String avatar = avatarPath + "/" + file.getOriginalFilename();
+        file.transferTo(new File(avatar));
+        userMapper.updateAvatarByUsername(avatar,username);
         return "上传成功";
     }
 

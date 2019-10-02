@@ -1,5 +1,6 @@
 package com.tglm.bbs.request;
 
+import com.tglm.bbs.entities.User;
 import com.tglm.bbs.exception.ServiceException;
 
 /**
@@ -9,6 +10,8 @@ import com.tglm.bbs.exception.ServiceException;
 
 public class ThreadContext {
     Session session;
+    User Visitor;
+
     private static final ThreadLocal<ThreadContext> threadLocal = new ThreadLocal<>();
 
     public static Session getSession() throws ServiceException {
@@ -29,6 +32,7 @@ public class ThreadContext {
         });
 
     }
+
 
 
 }

@@ -64,7 +64,7 @@ public class UserController {
         return userService.resetPassword(signInfo);
     }
 
-    @Refresh
+
     @GetMapping("search")
     public UserInfo search(String username) throws ServiceException {
         return userService.search(username);

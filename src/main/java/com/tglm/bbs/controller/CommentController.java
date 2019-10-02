@@ -36,7 +36,6 @@ public class CommentController {
     @GetMapping("getComment")
     public List<CommentInfo> getComment(Long postId) throws ServiceException {
         return commentService.getCommentInfo(postId);
-
     }
 
     @GetMapping("deleteComment")

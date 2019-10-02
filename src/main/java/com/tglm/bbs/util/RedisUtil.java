@@ -33,7 +33,9 @@ public class RedisUtil {
 
     public void updateSession() throws ServiceException {
 
-
+        if(!SessionUtil.valid()){
+            throw ServiceException.forCodeAndMessage(ServiceException.SESSION_EXPIRED,"Session过期啦");
+        }
         Session session = ThreadContext.getSession();
         Date date = new Date();
         date.setTime(System.currentTimeMillis());

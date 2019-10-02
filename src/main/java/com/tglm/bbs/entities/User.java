@@ -53,7 +53,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "avatar", nullable = true, length = -1)
+    @Column(name = "avatar", length = -1)
     public String getAvatar() {
         return avatar;
     }

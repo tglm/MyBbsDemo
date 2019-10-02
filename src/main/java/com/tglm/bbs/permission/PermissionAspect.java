@@ -30,7 +30,7 @@ public class PermissionAspect {
 
         Session session = redisUtil.getSession(RequestUtil.getHeaderInfo().getSessionId());
 
-        if(!SessionUtil.valid(session)){throw ServiceException.forCode(ServiceException.SESSION_EXPIRED);}
+        if(!SessionUtil.valid()){throw ServiceException.forCode(ServiceException.SESSION_EXPIRED);}
         if( !permit.role().equals(session.getRole()) ){
             throw ServiceException.forCode(ServiceException.EXCEED_AUTHORITY);
         }

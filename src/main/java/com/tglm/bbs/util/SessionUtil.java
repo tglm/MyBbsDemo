@@ -3,7 +3,9 @@ package com.tglm.bbs.util;
 
 import com.tglm.bbs.entities.Admin;
 import com.tglm.bbs.entities.User;
+import com.tglm.bbs.exception.ServiceException;
 import com.tglm.bbs.request.Session;
+import com.tglm.bbs.request.ThreadContext;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -29,7 +31,8 @@ public class SessionUtil {
         this.redisUtil = redisUtil;
     }
 
-    public static boolean valid(Session session) {
+    public static boolean valid() throws ServiceException {
+        Session session = ThreadContext.getSession();
         final int VALIDITY_PERIOD = 5 * 60 * 1000;
         return (System.currentTimeMillis() - session.getLastAccessTime().getTime()) <= VALIDITY_PERIOD;
     }

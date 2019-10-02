@@ -32,11 +32,10 @@ public class PostController {
     @GetMapping("list")
     public Page<PostInfo> listAll() throws ServiceException {
         return postService.listAll();
-
     }
 
     @Permit("user")
-    @PostMapping("savePost")
+    @PostMapping("postPost")
     @Refresh
     public String post(@RequestBody PostInfo postInfo) throws ServiceException, ParseException {
         return postService.post(postInfo);
