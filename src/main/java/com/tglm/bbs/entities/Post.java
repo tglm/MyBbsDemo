@@ -1,8 +1,6 @@
 package com.tglm.bbs.entities;
 
-import com.tglm.bbs.dao.UserMapper;
 import com.tglm.bbs.dto.NewPostInfo;
-import com.tglm.bbs.request.ThreadContext;
 import com.tglm.bbs.util.DateUtil;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -13,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.sql.Timestamp;
 import java.text.ParseException;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -31,12 +30,13 @@ public class Post {
     private Timestamp dateCreate;
 
     public Post(NewPostInfo newPostInfo) throws ParseException {
-        this.postId = newPostInfo.getPostId();
+
         this.content = newPostInfo.getContent();
-        this.creatorId =
-        this.topic = postInfo.isTopic();
-        this.dateCreate= DateUtil.dateToTimestamp(postInfo.getDateCreate());
-        this.formerPostId = postInfo.getFormerPostId();
+        this.topic = newPostInfo.isTopic();
+        this.dateCreate= DateUtil.dateToTimestamp(new Date(System.currentTimeMillis()));
+        if(newPostInfo.getFormerPostId() != null){
+            this.formerPostId = newPostInfo.getFormerPostId();
+        }
 
     }
 

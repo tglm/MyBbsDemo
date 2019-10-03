@@ -1,10 +1,11 @@
 package com.tglm.bbs.service;
 
-import com.tglm.bbs.util.InfoUtil;
 import com.tglm.bbs.dao.PostMapper;
+import com.tglm.bbs.dto.NewPostInfo;
 import com.tglm.bbs.dto.PostInfo;
 import com.tglm.bbs.entities.Post;
 import com.tglm.bbs.exception.ServiceException;
+import com.tglm.bbs.util.InfoUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -27,11 +28,11 @@ public class PostService {
     }
 
 
-    public String post(PostInfo postInfo) throws ServiceException, ParseException {
-        if(postInfo==null){
+    public String post(NewPostInfo newPostInfo) throws ServiceException, ParseException {
+        if(newPostInfo == null){
         throw ServiceException.forCode(ServiceException.NULL_PARAMETER_ERROR);
     }
-        Post post = new Post(postInfo);
+        Post post = new Post(newPostInfo);
 
         postMapper.savePost(post);
         return "发帖成功";
@@ -47,12 +48,11 @@ public class PostService {
         return posts.map(InfoUtil::toPostInfo);
     }
 
-    public String updatePost(PostInfo postInfo) throws ServiceException, ParseException {
-        if(postInfo == null || postInfo.getPostId() == null){
+    public String updatePost(NewPostInfo newPostInfo) throws ServiceException, ParseException {
+        if(newPostInfo == null || newPostInfo.getContent() == null){
             throw ServiceException.forCode(ServiceException.NULL_PARAMETER_ERROR);
         }
-        Post post = new Post(postInfo);
-
+        Post post = new Post(newPostInfo);
         postMapper.modifyPostContent(post,post.getPostId());
         return "更新成功";
 

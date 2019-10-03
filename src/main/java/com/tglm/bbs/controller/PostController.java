@@ -1,5 +1,6 @@
 package com.tglm.bbs.controller;
 
+import com.tglm.bbs.dto.NewPostInfo;
 import com.tglm.bbs.dto.PostInfo;
 import com.tglm.bbs.exception.ServiceException;
 import com.tglm.bbs.permission.Permit;
@@ -37,8 +38,8 @@ public class PostController {
     @Permit("user")
     @PostMapping("postPost")
     @Refresh
-    public String post(@RequestBody PostInfo postInfo) throws ServiceException, ParseException {
-        return postService.post(postInfo);
+    public String post(@RequestBody NewPostInfo newPostInfo) throws ServiceException, ParseException {
+        return postService.post(newPostInfo);
     }
 
 

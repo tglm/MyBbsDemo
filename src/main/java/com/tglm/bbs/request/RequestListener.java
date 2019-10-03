@@ -1,5 +1,6 @@
 package com.tglm.bbs.request;
 
+import com.tglm.bbs.dao.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -18,10 +19,12 @@ import javax.servlet.http.HttpServletRequest;
 public class RequestListener implements ServletRequestListener {
 
     final private RedisTemplate redisTemplate;
+    final private UserMapper userMapper;
 
     @Autowired
-    public RequestListener(RedisTemplate redisTemplate) {
+    public RequestListener(RedisTemplate redisTemplate, UserMapper userMapper) {
         this.redisTemplate = redisTemplate;
+        this.userMapper = userMapper;
     }
 
     @Override
@@ -37,7 +40,7 @@ public class RequestListener implements ServletRequestListener {
             return;
         }
         Session session = (Session) redisTemplate.opsForValue().get(sessionId);
-        ThreadContext.setSession(session);
+        ThreadContext.signIn(session,userMapper.findByUsername(session.getUsername()));
 
     }
 

@@ -24,14 +24,16 @@ public class ThreadContext {
         return threadLocal.get().session;
     }
 
-    public static void setSession(Session newSession){
+    public static void signIn(Session newSession, User user){
         threadLocal.set(new ThreadContext(){
             {
+                Visitor = user;
                 session = newSession;
             }
         });
 
     }
+
 
 
 

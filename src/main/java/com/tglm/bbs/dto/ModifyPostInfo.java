@@ -5,23 +5,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.lang.Nullable;
 
-import java.util.Date;
-
 /**
  * @author mlgt
- * @date 2019/9/14
+ * @date 2019/10/3
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostInfo {
-    @Nullable
-    private Long postId;
+public class ModifyPostInfo {
+    private
     private String content;
-    private Long creatorId;
     private boolean topic;
+    @Nullable
     private Long formerPostId;
-    private Date dateCreate;
-
 
 }
