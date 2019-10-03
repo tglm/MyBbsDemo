@@ -5,10 +5,7 @@ import com.tglm.bbs.exception.ServiceException;
 import com.tglm.bbs.refresh.Refresh;
 import com.tglm.bbs.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.util.List;
@@ -17,7 +14,9 @@ import java.util.List;
  * @author mlgt
  * @date 2019/9/8
  */
-@RestController("comment")
+@RestController
+@ResponseBody
+@RequestMapping("comment")
 public class CommentController {
 
     private final CommentService commentService;

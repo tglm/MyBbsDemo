@@ -19,7 +19,7 @@ public interface CommentMapper {
      * @param comment Comment
      */
     @Options(useGeneratedKeys = true, keyColumn = "comment_id", keyProperty = "commentId")
-    @Insert("INSERT bbs.comment(content,date,comment_id,former_comment,post_id) VALUES (#{content},#{date},#{commentId},#{formerComment},#{postId});")
+    @Insert("INSERT INTO bbs.comment(content,date,comment_id,former_comment,post_id) VALUES (#{content},#{date},#{commentId},#{formerComment},#{postId});")
     void saveComment(Comment comment);
 
     /**

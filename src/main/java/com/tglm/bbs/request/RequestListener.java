@@ -40,8 +40,11 @@ public class RequestListener implements ServletRequestListener {
             return;
         }
         Session session = (Session) redisTemplate.opsForValue().get(sessionId);
+
         ThreadContext.signIn(session,userMapper.findByUsername(session.getUsername()));
 
     }
+
+
 
 }

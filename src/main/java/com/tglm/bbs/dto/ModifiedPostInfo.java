@@ -12,10 +12,9 @@ import org.springframework.lang.Nullable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ModifyPostInfo {
-    private
+public class ModifiedPostInfo {
+    private Long postId;
     private String content;
-    private boolean topic;
     @Nullable
     private Long formerPostId;
 

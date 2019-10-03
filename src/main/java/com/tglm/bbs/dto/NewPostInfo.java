@@ -12,7 +12,7 @@ import org.springframework.lang.Nullable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class NewPostInfo {
+public class    NewPostInfo {
     private String content;
     private boolean topic;
     @Nullable

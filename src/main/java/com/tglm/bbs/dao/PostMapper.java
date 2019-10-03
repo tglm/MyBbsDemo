@@ -18,7 +18,7 @@ public interface PostMapper {
      * @param post post
      */
     @Options(useGeneratedKeys = true, keyColumn = "post_id", keyProperty = "postId")
-    @Insert("INSERT bbs.post (post_id,content,creator_id,topic,former_post_id,date_create) VALUES (#{postId},#{content},#{creatorId},#{topic},#{formerPostId},#{dateCreate});")
+    @Insert("INSERT INTO bbs.post (content,creator_id,topic,former_post_id,date_create) VALUES (#{content},#{creatorId},#{topic},#{formerPostId},#{dateCreate});")
     void savePost(Post post);
 
 
@@ -35,14 +35,14 @@ public interface PostMapper {
      *
      * @param postId Long
      */
-    @Select("DELETE * FROM bbs.post WHERE post_id=#{postId};")
+    @Select("DELETE * FROM bbs.post WHERE post_id = #{postId};")
     void deleteByPostId(@Param("post_id") Long postId);
 
     /**
      * @param post 更改后的贴
      * @param postId 根据Id覆盖
      */
-    @Update("UPDATE bbs.post set (post_id,content,creator_id,topic,former_post_id,date_create)=(#{postId},#{content},#{topic},#{formerPostId},#{dateCreate}) where post_id=#{postId};")
+    @Update("UPDATE bbs.post set (post_id,content,creator_id,former_post_id,date_create) = (#{post_id},#{content},#{formerPostId},#{dateCreate}) where post_id=#{post_id};")
     void modifyPostContent(Post post, @Param("post_id") Long postId);
 
 

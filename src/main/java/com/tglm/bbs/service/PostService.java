@@ -1,6 +1,7 @@
 package com.tglm.bbs.service;
 
 import com.tglm.bbs.dao.PostMapper;
+import com.tglm.bbs.dto.ModifiedPostInfo;
 import com.tglm.bbs.dto.NewPostInfo;
 import com.tglm.bbs.dto.PostInfo;
 import com.tglm.bbs.entities.Post;
@@ -48,11 +49,11 @@ public class PostService {
         return posts.map(InfoUtil::toPostInfo);
     }
 
-    public String updatePost(NewPostInfo newPostInfo) throws ServiceException, ParseException {
-        if(newPostInfo == null || newPostInfo.getContent() == null){
+    public String updatePost(ModifiedPostInfo modifiedPostInfo) throws ServiceException, ParseException {
+        if(modifiedPostInfo == null || modifiedPostInfo.getContent() == null){
             throw ServiceException.forCode(ServiceException.NULL_PARAMETER_ERROR);
         }
-        Post post = new Post(newPostInfo);
+        Post post = new Post(modifiedPostInfo);
         postMapper.modifyPostContent(post,post.getPostId());
         return "更新成功";
 
@@ -73,6 +74,7 @@ public class PostService {
                 tempId = temPost.getPostId();
             }
         }
+
         postMapper.deleteByPostId(post.getPostId());
         return "删除成功";
 

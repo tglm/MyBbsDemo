@@ -1,6 +1,9 @@
 package com.tglm.bbs.entities;
 
+import com.tglm.bbs.dto.ModifiedPostInfo;
 import com.tglm.bbs.dto.NewPostInfo;
+import com.tglm.bbs.exception.ServiceException;
+import com.tglm.bbs.request.ThreadContext;
 import com.tglm.bbs.util.DateUtil;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -29,15 +32,23 @@ public class Post {
     private Long formerPostId;
     private Timestamp dateCreate;
 
-    public Post(NewPostInfo newPostInfo) throws ParseException {
+    public Post(NewPostInfo newPostInfo) throws ParseException, ServiceException {
 
         this.content = newPostInfo.getContent();
+        this.creatorId = ThreadContext.getOperator().getUserId();
         this.topic = newPostInfo.isTopic();
         this.dateCreate= DateUtil.dateToTimestamp(new Date(System.currentTimeMillis()));
         if(newPostInfo.getFormerPostId() != null){
             this.formerPostId = newPostInfo.getFormerPostId();
         }
 
+    }
+    public Post(ModifiedPostInfo modifiedPostInfo) throws ServiceException, ParseException {
+        this.postId = modifiedPostInfo.getPostId();
+        this.content = modifiedPostInfo.getContent();
+        this.creatorId = ThreadContext.getOperator().getUserId();
+        this.formerPostId = modifiedPostInfo.getFormerPostId();
+        this.dateCreate = DateUtil.dateToTimestamp(new Date(System.currentTimeMillis()));
     }
 
     @Id
