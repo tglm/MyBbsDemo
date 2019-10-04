@@ -57,7 +57,7 @@ public class PostService {
             throw ServiceException.forCode(ServiceException.NULL_PARAMETER_ERROR);
         }
         Post post = new Post(modifiedPostInfo);
-//        postMapper.modifyPostContent(post,post.getPostId());
+
         postMapper.modifyPostContent(post);
         return "更新成功";
 
