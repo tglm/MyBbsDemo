@@ -1,5 +1,6 @@
 package com.tglm.bbs.request;
 
+import com.tglm.bbs.Page.PageArgs;
 import com.tglm.bbs.dao.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -40,8 +41,16 @@ public class RequestListener implements ServletRequestListener {
             return;
         }
         Session session = (Session) redisTemplate.opsForValue().get(sessionId);
-
-        ThreadContext.signIn(session,userMapper.findByUsername(session.getUsername()));
+        PageArgs args;
+        if(request.getHeader("pageNum") != null && request.getHeader("pageSize") != null){
+             args = new PageArgs(
+                    request.getIntHeader("pageNum"),
+                    request.getIntHeader("pageSize")
+            );
+        }else{
+            args = new PageArgs(1,10);
+        }
+        ThreadContext.signIn(session,userMapper.findByUsername(session.getUsername()),args);
 
     }
 

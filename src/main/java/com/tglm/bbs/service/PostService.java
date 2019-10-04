@@ -1,14 +1,15 @@
 package com.tglm.bbs.service;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
+import com.tglm.bbs.Page.PageArgs;
 import com.tglm.bbs.dao.PostMapper;
 import com.tglm.bbs.dto.ModifiedPostInfo;
 import com.tglm.bbs.dto.NewPostInfo;
-import com.tglm.bbs.dto.PostInfo;
 import com.tglm.bbs.entities.Post;
 import com.tglm.bbs.exception.ServiceException;
-import com.tglm.bbs.util.InfoUtil;
+import com.tglm.bbs.request.ThreadContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -39,14 +40,16 @@ public class PostService {
         return "发帖成功";
     }
 
-    public Page<PostInfo> listAll() throws ServiceException {
+    public PageInfo<Post> listAll() throws ServiceException {
 
-        if(postMapper.listAll() == null){
+        PageArgs args = ThreadContext.getPageArgs();
+        if(postMapper.listAll(args) == null){
             throw ServiceException.forCode(ServiceException.NULL_PARAMETER_ERROR);
         }
 
-        Page<Post> posts = postMapper.listAll();
-        return posts.map(InfoUtil::toPostInfo);
+        Page<Post> posts = postMapper.listAll(args);
+
+        return posts.toPageInfo();
     }
 
     public String updatePost(ModifiedPostInfo modifiedPostInfo) throws ServiceException, ParseException {
@@ -54,7 +57,8 @@ public class PostService {
             throw ServiceException.forCode(ServiceException.NULL_PARAMETER_ERROR);
         }
         Post post = new Post(modifiedPostInfo);
-        postMapper.modifyPostContent(post,post.getPostId());
+//        postMapper.modifyPostContent(post,post.getPostId());
+        postMapper.modifyPostContent(post);
         return "更新成功";
 
     }

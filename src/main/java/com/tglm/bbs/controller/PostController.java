@@ -1,14 +1,14 @@
 package com.tglm.bbs.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.tglm.bbs.dto.ModifiedPostInfo;
 import com.tglm.bbs.dto.NewPostInfo;
-import com.tglm.bbs.dto.PostInfo;
+import com.tglm.bbs.entities.Post;
 import com.tglm.bbs.exception.ServiceException;
 import com.tglm.bbs.permission.Permit;
 import com.tglm.bbs.refresh.Refresh;
 import com.tglm.bbs.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
@@ -31,7 +31,7 @@ public class PostController {
 
 
     @GetMapping("list")
-    public Page<PostInfo> listAll() throws ServiceException {
+    public PageInfo<Post> listAll() throws ServiceException {
         return postService.listAll();
     }
 

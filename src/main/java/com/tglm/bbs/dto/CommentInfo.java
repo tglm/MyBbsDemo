@@ -3,6 +3,7 @@ package com.tglm.bbs.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.lang.Nullable;
 
 import java.util.Date;
 
@@ -14,12 +15,16 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CommentInfo {
+public class  CommentInfo {
     private String content;
+    @Nullable
     private Date date;
+    @Nullable
     private Long commentId;
+    @Nullable
     private Long formerComment;
     private Long postId;
+
 
 
 

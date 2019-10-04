@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.sql.Timestamp;
 import java.text.ParseException;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -28,10 +29,9 @@ public class Comment {
     public Comment(CommentInfo commentInfo) throws ParseException {
 
         this.content = commentInfo.getContent();
-        this.commentId = commentInfo.getCommentId();
         this.formerComment = commentInfo.getFormerComment();
         this.postId = commentInfo.getPostId();
-        this.date = DateUtil.dateToTimestamp(commentInfo.getDate());
+        this.date = DateUtil.dateToTimestamp(new Date(System.currentTimeMillis()));
 
 
     }

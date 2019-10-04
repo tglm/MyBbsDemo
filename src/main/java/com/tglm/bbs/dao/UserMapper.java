@@ -1,9 +1,9 @@
 package com.tglm.bbs.dao;
 
-import com.tglm.bbs.util.PageArgs;
+import com.github.pagehelper.Page;
+import com.tglm.bbs.Page.PageArgs;
 import com.tglm.bbs.entities.User;
 import org.apache.ibatis.annotations.*;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Repository;
 
 /**

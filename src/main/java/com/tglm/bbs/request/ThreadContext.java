@@ -1,7 +1,6 @@
 package com.tglm.bbs.request;
 
-import com.tglm.bbs.entities.Comment;
-import com.tglm.bbs.entities.Post;
+import com.tglm.bbs.Page.PageArgs;
 import com.tglm.bbs.entities.User;
 import com.tglm.bbs.exception.ServiceException;
 
@@ -13,8 +12,7 @@ import com.tglm.bbs.exception.ServiceException;
 public class ThreadContext {
     Session session;
     User operator;
-    Post post;
-    Comment comment;
+    PageArgs pageArgs;
 
     private static final ThreadLocal<ThreadContext> threadLocal = new ThreadLocal<>();
 
@@ -28,11 +26,12 @@ public class ThreadContext {
         return threadLocal.get().session;
     }
 
-    static void signIn(Session newSession, User user){
+    static void signIn(Session newSession, User user, PageArgs args){
         threadLocal.set(new ThreadContext(){
             {
                 operator = user;
                 session = newSession;
+                pageArgs = args;
             }
         });
 
@@ -49,6 +48,15 @@ public class ThreadContext {
         return threadLocal.get().operator;
     }
 
+    public static PageArgs getPageArgs() throws ServiceException {
+        if(threadLocal.get() == null){
+            throw ServiceException.forCodeAndMessage(ServiceException.NULL_PARAMETER_ERROR,"获取ThreadContext失败");
+        }
+        if(threadLocal.get().operator == null){
+            throw ServiceException.forCodeAndMessage(ServiceException.NULL_PARAMETER_ERROR,"获取PageArgs失败");
+        }
+        return threadLocal.get().pageArgs;
+    }
 
 
 

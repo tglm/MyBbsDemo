@@ -1,8 +1,9 @@
 package com.tglm.bbs.dao;
 
+import com.github.pagehelper.Page;
+import com.tglm.bbs.Page.PageArgs;
 import com.tglm.bbs.entities.Post;
 import org.apache.ibatis.annotations.*;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -27,8 +28,8 @@ public interface PostMapper {
      *
      * @return 返回Topic帖（分页）
      */
-    @Select("SELECT * FROM bbs.post WHERE topic = true;")
-    Page<Post> listAll();
+    @Select("SELECT * FROM bbs.post WHERE topic = true order by post_id desc;")
+    Page<Post> listAll(PageArgs pageArgs);
 
     /**
      * 根据id删除帖子
@@ -40,10 +41,9 @@ public interface PostMapper {
 
     /**
      * @param post 更改后的贴
-     * @param postId 根据Id覆盖
      */
-    @Update("UPDATE bbs.post set (post_id,content,creator_id,former_post_id,date_create) = (#{post_id},#{content},#{formerPostId},#{dateCreate}) where post_id=#{post_id};")
-    void modifyPostContent(Post post, @Param("post_id") Long postId);
+    @Update("UPDATE bbs.post set (post_id,content,creator_id,former_post_id,date_create) = (#{postId},#{content},#{creatorId},#{formerPostId},#{dateCreate}) where post_id=#{postId};")
+    void modifyPostContent(Post post);
 
 
     Post findPostByPostId(Long postId);
