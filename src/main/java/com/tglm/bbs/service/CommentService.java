@@ -1,7 +1,6 @@
 package com.tglm.bbs.service;
 
 import com.github.pagehelper.Page;
-import com.github.pagehelper.PageInfo;
 import com.tglm.bbs.dao.CommentMapper;
 import com.tglm.bbs.dto.CommentInfo;
 import com.tglm.bbs.entities.Comment;
@@ -37,13 +36,13 @@ public class CommentService {
     }
 
 
-    public PageInfo<Comment> getCommentInfo(Long postId) throws ServiceException {
+    public Page<Comment> getCommentInfo(Long postId) throws ServiceException {
 
         Page<Comment> comments = commentMapper.getComment(postId, ThreadContext.getPageArgs());
         if (comments == null) {
             throw ServiceException.forCode(ServiceException.NULL_PARAMETER_ERROR);
         }
-        return comments.toPageInfo();
+        return comments;
     }
 
     public String deleteCommentByPostId(Long postId) throws ServiceException {

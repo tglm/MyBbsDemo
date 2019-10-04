@@ -1,6 +1,6 @@
 package com.tglm.bbs.controller;
 
-import com.github.pagehelper.PageInfo;
+import com.github.pagehelper.Page;
 import com.tglm.bbs.dto.CommentInfo;
 import com.tglm.bbs.entities.Comment;
 import com.tglm.bbs.exception.ServiceException;
@@ -34,7 +34,7 @@ public class CommentController {
     }
 
     @GetMapping("getComment")
-    public PageInfo<Comment> getComment(Long postId) throws ServiceException {
+    public Page<Comment> getComment(Long postId) throws ServiceException {
         return commentService.getCommentInfo(postId);
     }
 

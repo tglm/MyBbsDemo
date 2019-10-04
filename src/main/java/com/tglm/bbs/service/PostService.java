@@ -1,7 +1,6 @@
 package com.tglm.bbs.service;
 
 import com.github.pagehelper.Page;
-import com.github.pagehelper.PageInfo;
 import com.tglm.bbs.Page.PageArgs;
 import com.tglm.bbs.dao.PostMapper;
 import com.tglm.bbs.dto.ModifiedPostInfo;
@@ -40,7 +39,7 @@ public class PostService {
         return "发帖成功";
     }
 
-    public PageInfo<Post> listAll() throws ServiceException {
+    public Page<Post> listAll() throws ServiceException {
 
         PageArgs args = ThreadContext.getPageArgs();
         if(postMapper.listAll(args) == null){
@@ -49,7 +48,7 @@ public class PostService {
 
         Page<Post> posts = postMapper.listAll(args);
 
-        return posts.toPageInfo();
+        return posts;
     }
 
     public String updatePost(ModifiedPostInfo modifiedPostInfo) throws ServiceException, ParseException {

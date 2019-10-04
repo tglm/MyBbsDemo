@@ -1,6 +1,6 @@
 package com.tglm.bbs.controller;
 
-import com.github.pagehelper.PageInfo;
+import com.github.pagehelper.Page;
 import com.tglm.bbs.dto.ModifiedPostInfo;
 import com.tglm.bbs.dto.NewPostInfo;
 import com.tglm.bbs.entities.Post;
@@ -31,7 +31,7 @@ public class PostController {
 
 
     @GetMapping("list")
-    public PageInfo<Post> listAll() throws ServiceException {
+    public Page<Post> listAll() throws ServiceException {
         return postService.listAll();
     }
 
