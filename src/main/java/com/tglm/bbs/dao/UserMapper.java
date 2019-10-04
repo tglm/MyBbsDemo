@@ -1,7 +1,5 @@
 package com.tglm.bbs.dao;
 
-import com.github.pagehelper.Page;
-import com.tglm.bbs.Page.PageArgs;
 import com.tglm.bbs.entities.User;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
@@ -33,14 +31,6 @@ public interface UserMapper {
     User findByUsername(@Param("username") String username);
 
     /**
-     * 返回所有User信息
-     * @param pageArgs (Integer pageNum,Integer pageSize)
-     * @return Page<User> 分页User实体
-     */
-    @Select("SELECT * FROM bbs.user;")
-    Page<User> findAll(PageArgs pageArgs);
-
-    /**
      * 改密码
      *
      * @param password 新改的密码
@@ -67,5 +57,13 @@ public interface UserMapper {
     @Select("SELECT * FROM bbs.user WHERE user_id = #{userId};")
     User findByUserId(Long userId);
 
+
+    /**
+     * 删除用户
+     *
+     * @param userId Long
+     */
+    @Delete("DELETE FROM bbs.user WHERE user_id = #{userId};")
+    void deleteByUserId(Long userId);
 
 }

@@ -32,7 +32,7 @@ public class Comment {
         this.formerComment = commentInfo.getFormerComment();
         this.postId = commentInfo.getPostId();
         this.date = DateUtil.dateToTimestamp(new Date(System.currentTimeMillis()));
-
+        this.commentId = null;
 
     }
 

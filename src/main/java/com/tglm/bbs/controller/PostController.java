@@ -52,8 +52,7 @@ public class PostController {
 
     }
 
-    @Permit("admin")
-    @GetMapping("deletePost")
+    @PostMapping("deletePost")
     public String deletePost(Long postId){
         return postService.deletePost(postId);
     }

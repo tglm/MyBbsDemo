@@ -1,13 +1,7 @@
 package com.tglm.bbs.util;
 
-import com.tglm.bbs.dto.CommentInfo;
-import com.tglm.bbs.dto.PostInfo;
 import com.tglm.bbs.dto.UserInfo;
-import com.tglm.bbs.entities.Comment;
-import com.tglm.bbs.entities.Post;
 import com.tglm.bbs.entities.User;
-
-import java.util.Date;
 
 /**
  * @author mlgt
@@ -27,31 +21,9 @@ public class InfoUtil {
         );
     }
 
-    public static CommentInfo toCommentInfo(Comment comment) {
-        Date date = comment.getDate();
-        return new CommentInfo(
-                comment.getContent(),
-                date,
-                comment.getCommentId(),
-                comment.getPostId(),
-                comment.getFormerComment()
-
-        );
-    }
 
 
-    public static PostInfo toPostInfo(Post post) {
 
-        return new PostInfo(
-                post.getPostId(),
-                post.getContent(),
-                post.getCreatorId(),
-                post.isTopic(),
-                post.getFormerPostId(),
-                DateUtil.timestampToDate(post.getDateCreate())
-        );
-
-    }
 
 
 

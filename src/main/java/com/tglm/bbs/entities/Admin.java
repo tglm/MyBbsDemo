@@ -1,5 +1,8 @@
 package com.tglm.bbs.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +14,8 @@ import java.util.Objects;
  * @date 2019/9/14
  */
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Admin {
     private String account;
     private String password;

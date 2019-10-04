@@ -1,10 +1,10 @@
 package com.tglm.bbs.dao;
 
+import com.github.pagehelper.Page;
+import com.tglm.bbs.Page.PageArgs;
 import com.tglm.bbs.entities.Comment;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 /**
  * @author mlgt
@@ -28,14 +28,14 @@ public interface CommentMapper {
      * @param postId Long
      * @return 该帖子下所有评论
      */
-    @Select("SELECT * FROM bbs.comment WHERE post_id = #{postId};")
-    List<Comment> getComment(@Param("postId") Long postId);
+    @Select("SELECT * FROM bbs.comment WHERE post_id = #{postId} by comment_id desc;")
+    Page<Comment> getComment(@Param("postId") Long postId, PageArgs pageArgs);
 
     /**
      * 删除帖子下的所有评论
      *
      * @param postId Long
      */
-    @Delete("DELETE * FROM bbs.comment WHERE post_id = #{postId};")
+    @Delete("DELETE FROM bbs.comment WHERE post_id = #{postId};")
     void deleteCommentByPostId(@Param("postId") Long postId);
 }

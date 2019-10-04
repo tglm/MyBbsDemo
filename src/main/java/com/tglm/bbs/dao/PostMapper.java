@@ -6,6 +6,8 @@ import com.tglm.bbs.entities.Post;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @author mlgt
  * @date 2019/9/8
@@ -36,7 +38,7 @@ public interface PostMapper {
      *
      * @param postId Long
      */
-    @Select("DELETE * FROM bbs.post WHERE post_id = #{postId};")
+    @Select("DELETE FROM bbs.post WHERE post_id = #{postId};")
     void deleteByPostId(@Param("post_id") Long postId);
 
     /**
@@ -45,10 +47,19 @@ public interface PostMapper {
     @Update("UPDATE bbs.post set (post_id,content,creator_id,former_post_id,date_create) = (#{postId},#{content},#{creatorId},#{formerPostId},#{dateCreate}) where post_id=#{postId};")
     void modifyPostContent(Post post);
 
+    //没测试--------------------------------------------------------------------------------
 
+    @Select("SELECT * FROM bbs.post WHERE creator_id = #{userId};")
+    List<Post> findPostByUserId(Long userId);
+
+    @Select("SELECT * FROM bbs.post WHERE post_id = #{postId};")
     Post findPostByPostId(Long postId);
 
+    @Select("SELECT * FROM bbs.post WHERE former_post_id = #{formerPostId};")
     Post findPostByFormerPostId(Long formerPostId);
+
+    @Delete("DELETE FROM bbs.post WHERE creator_id = #{userId};")
+    void deleteByUserId(Long userId);
 
 
 }

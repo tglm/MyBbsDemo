@@ -69,7 +69,7 @@ public class PostService {
 
         if(post.isTopic()){
             Long tempId = post.getPostId();
-            while (postMapper.findPostByPostId(tempId) != null){
+            while (postMapper.findPostByFormerPostId(tempId) != null){
                 postMapper.deleteByPostId(tempId);
                 Post temPost = postMapper.findPostByFormerPostId(tempId);
                 if(temPost == null){
@@ -77,6 +77,7 @@ public class PostService {
                 }
                 tempId = temPost.getPostId();
             }
+            return "删除成功";
         }
 
         postMapper.deleteByPostId(post.getPostId());

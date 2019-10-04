@@ -1,6 +1,8 @@
 package com.tglm.bbs.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.tglm.bbs.dto.CommentInfo;
+import com.tglm.bbs.entities.Comment;
 import com.tglm.bbs.exception.ServiceException;
 import com.tglm.bbs.refresh.Refresh;
 import com.tglm.bbs.service.CommentService;
@@ -8,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
-import java.util.List;
 
 /**
  * @author mlgt
@@ -28,16 +29,16 @@ public class CommentController {
 
     @PostMapping("saveComment")
     @Refresh
-    public void saveComment(@RequestBody CommentInfo commentInfo) throws ParseException, ServiceException {
-         commentService.saveComment(commentInfo);
+    public String saveComment(@RequestBody CommentInfo commentInfo) throws ParseException, ServiceException {
+         return commentService.saveComment(commentInfo);
     }
 
     @GetMapping("getComment")
-    public List<CommentInfo> getComment(Long postId) throws ServiceException {
+    public PageInfo<Comment> getComment(Long postId) throws ServiceException {
         return commentService.getCommentInfo(postId);
     }
 
-    @GetMapping("deleteComment")
+    @PostMapping("deleteComment")
     @Refresh
     public String deleteComment(Long postId) throws ServiceException {
         return commentService.deleteCommentByPostId(postId);

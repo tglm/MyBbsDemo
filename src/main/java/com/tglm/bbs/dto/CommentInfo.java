@@ -5,8 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.lang.Nullable;
 
-import java.util.Date;
-
 
 /**
  * @author mlgt
@@ -17,10 +15,6 @@ import java.util.Date;
 @NoArgsConstructor
 public class  CommentInfo {
     private String content;
-    @Nullable
-    private Date date;
-    @Nullable
-    private Long commentId;
     @Nullable
     private Long formerComment;
     private Long postId;
