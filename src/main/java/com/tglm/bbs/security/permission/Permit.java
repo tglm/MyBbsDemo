@@ -1,4 +1,4 @@
-package com.tglm.bbs.permission;
+package com.tglm.bbs.security.permission;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

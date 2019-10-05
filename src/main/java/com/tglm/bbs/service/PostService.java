@@ -6,7 +6,7 @@ import com.tglm.bbs.dao.PostMapper;
 import com.tglm.bbs.dto.ModifiedPostInfo;
 import com.tglm.bbs.dto.NewPostInfo;
 import com.tglm.bbs.entities.Post;
-import com.tglm.bbs.exception.ServiceException;
+import com.tglm.bbs.security.exception.ServiceException;
 import com.tglm.bbs.request.ThreadContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

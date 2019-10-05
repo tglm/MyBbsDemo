@@ -4,8 +4,9 @@ import com.github.pagehelper.Page;
 import com.tglm.bbs.dto.ModifiedPostInfo;
 import com.tglm.bbs.dto.NewPostInfo;
 import com.tglm.bbs.entities.Post;
-import com.tglm.bbs.exception.ServiceException;
-import com.tglm.bbs.permission.Permit;
+import com.tglm.bbs.security.authCheck.Creator;
+import com.tglm.bbs.security.exception.ServiceException;
+import com.tglm.bbs.security.permission.Permit;
 import com.tglm.bbs.refresh.Refresh;
 import com.tglm.bbs.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,7 @@ public class PostController {
 
 
     @Permit("user")
+    @Creator
     @PostMapping("updatePost")
     @Refresh
     public String updatePost(@RequestBody ModifiedPostInfo modifiedPostInfo) throws ServiceException, ParseException {
@@ -52,6 +54,7 @@ public class PostController {
 
     }
 
+    @Creator
     @PostMapping("deletePost")
     public String deletePost(Long postId){
         return postService.deletePost(postId);

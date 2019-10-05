@@ -1,6 +1,6 @@
 package com.tglm.bbs.util;
 
-import com.tglm.bbs.exception.ServiceException;
+import com.tglm.bbs.security.exception.ServiceException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;

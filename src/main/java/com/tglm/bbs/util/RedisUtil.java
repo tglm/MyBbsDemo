@@ -1,6 +1,6 @@
 package com.tglm.bbs.util;
 
-import com.tglm.bbs.exception.ServiceException;
+import com.tglm.bbs.security.exception.ServiceException;
 import com.tglm.bbs.request.Session;
 import com.tglm.bbs.request.ThreadContext;
 import org.springframework.beans.factory.annotation.Autowired;

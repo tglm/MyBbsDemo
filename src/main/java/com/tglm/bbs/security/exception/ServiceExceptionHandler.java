@@ -1,4 +1,4 @@
-package com.tglm.bbs.exception;
+package com.tglm.bbs.security.exception;
 
 
 import com.tglm.bbs.response.SimpleResponse;

@@ -1,8 +1,8 @@
 package com.tglm.bbs.controller;
 
 import com.tglm.bbs.dto.SignInfo;
-import com.tglm.bbs.exception.ServiceException;
-import com.tglm.bbs.permission.Permit;
+import com.tglm.bbs.security.exception.ServiceException;
+import com.tglm.bbs.security.permission.Permit;
 import com.tglm.bbs.request.Session;
 import com.tglm.bbs.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;

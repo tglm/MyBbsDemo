@@ -2,7 +2,7 @@ package com.tglm.bbs.request;
 
 import com.tglm.bbs.Page.PageArgs;
 import com.tglm.bbs.entities.User;
-import com.tglm.bbs.exception.ServiceException;
+import com.tglm.bbs.security.exception.ServiceException;
 
 /**
  * @author mlgt

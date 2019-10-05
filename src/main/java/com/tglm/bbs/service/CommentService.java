@@ -4,7 +4,7 @@ import com.github.pagehelper.Page;
 import com.tglm.bbs.dao.CommentMapper;
 import com.tglm.bbs.dto.CommentInfo;
 import com.tglm.bbs.entities.Comment;
-import com.tglm.bbs.exception.ServiceException;
+import com.tglm.bbs.security.exception.ServiceException;
 import com.tglm.bbs.request.ThreadContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

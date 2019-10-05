@@ -4,7 +4,7 @@ import com.tglm.bbs.dao.UserMapper;
 import com.tglm.bbs.dto.SignInfo;
 import com.tglm.bbs.dto.UserInfo;
 import com.tglm.bbs.entities.User;
-import com.tglm.bbs.exception.ServiceException;
+import com.tglm.bbs.security.exception.ServiceException;
 import com.tglm.bbs.request.Session;
 import com.tglm.bbs.upload.Upload;
 import com.tglm.bbs.util.*;

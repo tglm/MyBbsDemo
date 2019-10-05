@@ -1,10 +1,10 @@
-package com.tglm.bbs.permission;
+package com.tglm.bbs.security.permission;
 
 import com.tglm.bbs.util.RedisUtil;
 import com.tglm.bbs.util.RequestUtil;
 import com.tglm.bbs.util.SessionUtil;
 import com.tglm.bbs.request.Session;
-import com.tglm.bbs.exception.ServiceException;
+import com.tglm.bbs.security.exception.ServiceException;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;

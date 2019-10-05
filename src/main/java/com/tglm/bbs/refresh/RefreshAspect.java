@@ -1,7 +1,7 @@
 package com.tglm.bbs.refresh;
 
 import com.tglm.bbs.util.RedisUtil;
-import com.tglm.bbs.exception.ServiceException;
+import com.tglm.bbs.security.exception.ServiceException;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;

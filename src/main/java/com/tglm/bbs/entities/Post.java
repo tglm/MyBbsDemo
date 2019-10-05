@@ -2,7 +2,7 @@ package com.tglm.bbs.entities;
 
 import com.tglm.bbs.dto.ModifiedPostInfo;
 import com.tglm.bbs.dto.NewPostInfo;
-import com.tglm.bbs.exception.ServiceException;
+import com.tglm.bbs.security.exception.ServiceException;
 import com.tglm.bbs.request.ThreadContext;
 import com.tglm.bbs.util.DateUtil;
 import lombok.AllArgsConstructor;

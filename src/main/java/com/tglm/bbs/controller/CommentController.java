@@ -3,7 +3,8 @@ package com.tglm.bbs.controller;
 import com.github.pagehelper.Page;
 import com.tglm.bbs.dto.CommentInfo;
 import com.tglm.bbs.entities.Comment;
-import com.tglm.bbs.exception.ServiceException;
+import com.tglm.bbs.security.authCheck.Creator;
+import com.tglm.bbs.security.exception.ServiceException;
 import com.tglm.bbs.refresh.Refresh;
 import com.tglm.bbs.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,7 @@ public class CommentController {
     }
 
     @PostMapping("deleteComment")
+    @Creator
     @Refresh
     public String deleteComment(Long postId) throws ServiceException {
         return commentService.deleteCommentByPostId(postId);

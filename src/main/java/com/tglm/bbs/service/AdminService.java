@@ -7,7 +7,7 @@ import com.tglm.bbs.dao.UserMapper;
 import com.tglm.bbs.dto.SignInfo;
 import com.tglm.bbs.entities.Admin;
 import com.tglm.bbs.entities.Post;
-import com.tglm.bbs.exception.ServiceException;
+import com.tglm.bbs.security.exception.ServiceException;
 import com.tglm.bbs.request.Session;
 import com.tglm.bbs.util.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;

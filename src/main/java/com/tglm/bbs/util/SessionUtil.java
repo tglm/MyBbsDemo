@@ -3,7 +3,7 @@ package com.tglm.bbs.util;
 
 import com.tglm.bbs.entities.Admin;
 import com.tglm.bbs.entities.User;
-import com.tglm.bbs.exception.ServiceException;
+import com.tglm.bbs.security.exception.ServiceException;
 import com.tglm.bbs.request.Session;
 import com.tglm.bbs.request.ThreadContext;
 import lombok.Getter;
